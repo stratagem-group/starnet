@@ -1,7 +1,7 @@
 # Release train — the ONE path from a version tag to a staged draft release.
 #
 # This workflow replaces release.yml's publish role. It NEVER publishes: it produces a
-# DRAFT release on androoAGI/starnet-releases with every supported platform's signed
+# DRAFT release on stratagem-group/starnet-releases with every supported platform's signed
 # installer + updater artifact + a multi-platform latest.json attached. The only publish is a
 # human clicking "Publish" on GitHub after reviewing the verify summary. Until that click,
 # zero users can receive anything.
@@ -16,7 +16,7 @@
 #                                        fallback here — an unsigned release train is not a thing.
 #   TAURI_SIGNING_PRIVATE_KEY_PASSWORD — empty string (key encrypted with an empty password).
 #   RELEASES_TOKEN                     — fine-grained PAT with Contents:write on
-#                                        androoAGI/starnet-releases.
+#                                        stratagem-group/starnet-releases.
 #   APPLE_* (required for macOS)       — codesign/notarize the mac DMG. The release train
 #                                        fails closed when any Apple credential is absent;
 #                                        public releases must never stage an unsigned Mac build.
@@ -42,6 +42,7 @@ jobs:
   # Job 1 — gate: nothing builds unless the fast test suite is green.
   # -------------------------------------------------------------------------------------------
   gate:
+    if: ${{ vars.STRATAGEM_RELEASE_ENABLED == 'true' }}
     runs-on: ubuntu-latest
     steps:
       # fetch-depth: 0 — the claims-authority test resolves the release-surface manifest's
@@ -878,7 +879,7 @@ jobs:
           node scripts/release-assemble-manifest.mjs \
             --dist dist \
             --version "${{ steps.ver.outputs.version }}" \
-            --repo androoAGI/starnet-releases \
+            --repo stratagem-group/starnet-releases \
             --tag "${{ steps.ver.outputs.tag }}" \
             --notes-file RELEASE_NOTES.md \
             --allow-missing linux-x86_64,linux-x86_64-deb
@@ -902,7 +903,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.RELEASES_TOKEN }}
-      REPO: androoAGI/starnet-releases
+      REPO: stratagem-group/starnet-releases
     steps:
       - uses: actions/checkout@v4
         with:
