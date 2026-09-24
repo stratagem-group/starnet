@@ -1,101 +1,82 @@
-# Installing StarNet (Desktop)
+# Installing / Running the Stratagem Fork
 
-StarNet's public release train supports **Windows and macOS**:
+> **Internal engineering status:** this fork does not yet have an approved desktop distribution.
+> Do not treat upstream StarNet installers as builds of the Stratagem fork.
 
-| Platform | Download this asset |
-| --- | --- |
-| **Windows** (10/11, 64-bit) | `StarNet_<version>_x64-setup.exe` |
-| **macOS — Apple Silicon** (M1/M2/M3/M4) | `StarNet_<version>_aarch64.dmg` |
-| **macOS — Intel** | `StarNet_<version>_x64.dmg` |
+## Run from source
 
-Linux packages may be produced by the manual/internal desktop-build workflow, but Linux is not
-part of the public release train and is not a supported release target.
+Requirements:
 
-Download from the [StarNet releases page](https://github.com/androoAGI/starnet-releases/releases/latest).
-Use only an asset attached to the release you intend to install.
+- Node.js 18+ (Node.js 22 matches upstream CI)
+- Git
+- Rust + Tauri prerequisites only when building the desktop shell
 
-## What the public release train guarantees
+Clone the Stratagem repository:
 
-The tagged public workflow is configured to fail closed unless all of these checks pass:
+```bash
+git clone https://github.com/stratagem-group/starnet.git
+cd starnet
+```
 
-- The Windows app and installer have valid Authenticode signatures, the expected publisher,
-  and a trusted timestamp.
-- Both macOS architectures have Developer ID signatures. Their bundled native dependencies
-  are signed and timestamped, and the DMGs are accepted and stapled by Apple notarization.
-- Every platform updater artifact has a valid updater signature and is included in the one
-  Windows/macOS update manifest.
+Run the local sidecar/UI:
 
-These are **release-pipeline requirements**, not installed proof for a particular download.
-This repository does not contain evidence that the asset you downloaded was installed and
-launched on your exact OS. If your OS reports an unknown publisher, a missing Developer ID,
-or a notarization failure, stop and report the release and asset name rather than bypassing the
-warning.
+```bash
+node sidecar/index.js
+```
 
-Manual/local and shareable test builds are a different tier. They can be intentionally unsigned
-when signing credentials are unavailable and are for internal testing only. Do not infer public
-release trust from a successful local build.
+Open:
 
-## Windows
+```text
+http://127.0.0.1:8787
+```
 
-1. Run `StarNet_<version>_x64-setup.exe`.
-2. Confirm Windows identifies the publisher expected by the release notes before approving the
-   installer.
-3. Complete the installer, then launch StarNet from the Start menu.
+For desktop development:
 
-An Authenticode signature does not guarantee that SmartScreen is silent. A new certificate can
-still have limited reputation. If SmartScreen shows **Windows protected your PC**, inspect the
-publisher under **More info** before choosing **Run anyway**. Do not proceed when the publisher is
-unknown or different from the release notes.
+```bash
+npm ci
+npm run desktop:dev
+```
 
-Windows 11 Smart App Control can apply additional policy even to signed software. Its verdict is
-machine policy, not proof that an installation was exercised by this repository's test suite.
+For local desktop build testing:
 
-To uninstall, use **Settings → Apps → Installed apps**.
+```bash
+npm run desktop:build
+```
 
-## macOS
+Local builds are engineering artifacts only until the Stratagem release/signing chain is established.
 
-1. Choose `aarch64.dmg` for Apple Silicon or `x64.dmg` for an Intel Mac. Check **Apple menu →
-   About This Mac** if you are unsure.
-2. Open the DMG and drag **StarNet** into **Applications**.
-3. Launch StarNet from Applications.
+## Local models
 
-The public release train requires a Developer ID signature and a stapled Apple notarization
-ticket. A public DMG should therefore pass Gatekeeper normally. Do **not** clear quarantine with
-`xattr` or use an unsigned-app override for a purported public release. If macOS says the app is
-damaged, from an unidentified developer, or cannot be checked for malicious software, stop and
-report the release tag, asset name, Mac architecture, and macOS version.
+Ollama can be used without a cloud API key. Install Ollama, pull a model, and select OLLAMA under
+the provider settings. The application expects Ollama on `127.0.0.1:11434`.
 
-To uninstall, quit StarNet and drag it from **Applications** to the Trash.
+## Desktop distribution gate
 
-## Run free with a local model
+A Stratagem desktop release must not be published until all of the following exist and are validated:
 
-StarNet does not require an API key or a StarNet account. Install [Ollama](https://ollama.com),
-pull a model (`ollama pull llama3.1`), and choose **OLLAMA** as the provider — on the first-run
-brain screen, or later under **SETTINGS → PROVIDERS**. StarNet reaches Ollama at `127.0.0.1:11434`
-and shows it as ready only after it has listed your local models. Local models are smaller than
-cloud models: expect slower, rougher results on long tasks.
+- derivative product name
+- derivative logo and artwork
+- unique desktop identifier
+- Stratagem-controlled publisher/signing identity
+- Stratagem-owned updater signing key
+- Stratagem-owned release repository/channel
+- Windows signing configuration
+- macOS Developer ID/notarization configuration where applicable
+- updated privacy/support documentation
+- clean-install and update-path test receipts
 
-## Updates
+The current updater configuration has been severed from the upstream release repository and points
+at the reserved Stratagem release location. That location must remain unpublished until the fork-owned
+signing key and release process are established.
 
-The public release train produces signed updater artifacts for Windows and both Mac
-architectures. StarNet's Update Center checks the public manifest and verifies a downloaded
-update against the updater public key embedded in the app before installation. Updater signing
-is separate from Authenticode, Developer ID signing, and Apple notarization; the public train
-requires all applicable layers.
+See:
 
-On Windows, current manual installers detect an older StarNet installation and use the same
-in-place update mode as Update Center. They do not depend on the older installation's
-`uninstall.exe`, and the user's station data remains outside the application directory. If an
-older installer still shows an **Already Installed** page, quit StarNet from its tray icon,
-choose **Do not uninstall**, and continue. Do not delete `%APPDATA%\ai.skynet.harness` as an
-update workaround.
+- `docs/STRATAGEM_RELEASE_ISOLATION_AUDIT.md`
+- `docs/STARNET_PRODUCTION_READINESS_PROGRAM.md`
+- `docs/SPRINT_1_BACKLOG.md`
 
-This describes the supported update path. It does not claim that an update was exercised on an
-installed copy from this candidate. If the Update Center cannot complete an update, download the
-matching current installer/DMG from the releases page and report the failure before relying on
-automatic update behavior.
+## Data location warning
 
-## Support
-
-Report installer, Gatekeeper, SmartScreen, or updater problems to **androo.agi@gmail.com**. Include
-the release tag, exact asset name, OS version, CPU architecture, and the complete warning text.
+The current code still uses the historical `ai.skynet.harness` application-data identifier for
+backward compatibility. Do not rename or migrate that identifier casually; it is part of the runtime
+state/keychain migration audit and will be changed only with an explicit migration plan.

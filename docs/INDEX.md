@@ -10,6 +10,18 @@ A map of the ~95 files in `docs/`. They fall into four buckets: **living referen
 
 ---
 
+## Stratagem fork governance
+
+Stratagem-owned operating documents for this derivative:
+
+- **AI_SYSTEMS_OPERATING_CHARTER.md** — assigns work across ChatGPT / Command, Otto, StarNet, Echo Lite, and Nomentis.
+- **STARNET_PRODUCTION_READINESS_PROGRAM.md** — production-hardening gates and sprint sequence.
+- **STARNET_WORKFLOW_ROUTING_GUIDE.md** — Otto vs StarNet routing and X/Y/Z taxonomy.
+- **STRATAGEM_FORK_STATUS.md** — current ownership/upstream/release boundary.
+- **STRATAGEM_RELEASE_ISOLATION_AUDIT.md** — upstream distribution coupling and required separation.
+- **SPRINT_1_BACKLOG.md** — authoritative current hardening tracker while GitHub Issues remain disabled.
+- **XENEXUS_FRONTEND_BUCKET_MAP.md** — file-by-file keep/reskin/surgical-modification map for the Xenexus frontend conversion.
+
 ## Living architecture / subsystem reference
 
 The docs closest to "how the thing is shaped." Still dated in spirit, but these describe

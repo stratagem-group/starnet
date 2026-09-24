@@ -4,12 +4,10 @@
 
 **A living pixel-art station where real AI agents do real work.**
 
-[![Download](https://img.shields.io/github/v/release/androoAGI/starnet-releases?label=download&color=f5a623)](https://github.com/androoAGI/starnet-releases/releases/latest)
 [![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-4a90d9)](INSTALL.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2ea44f)](LICENSE)
 [![Local-first](https://img.shields.io/badge/local--first-your%20machine%2C%20your%20data-8250df)](PRIVACY.md)
 
-[Download](https://github.com/androoAGI/starnet-releases/releases/latest) ·
 [Install guide](INSTALL.md) ·
 [Run from source](#run-from-source) ·
 [Docs](docs/INDEX.md) ·
@@ -18,6 +16,9 @@
 <img src=".github/media/station-iso.png" alt="The StarNet station — rooms, crew, and workstations rendered from live harness state" width="540">
 
 </div>
+
+> [!IMPORTANT]
+> **Stratagem fork status:** this repository is a derivative under active internal hardening. It is **not an official StarNet distribution** and currently must not be used to publish Stratagem desktop binaries. The upstream name, logo, station artwork, sprites, updater channel, and other brand assets remain subject to the upstream project's NOTICE. A Stratagem release will require its own product identity, artwork, signing key, and update channel.
 
 StarNet is a local-first desktop harness where you create AI agents, organize them into a
 pixel-art space station, and watch them perform real work with real models and tools. The
@@ -57,30 +58,15 @@ simulation.
 StarNet does not simulate revenue, completed work, model activity, or spend. Its core product
 law is that **the interface must never assert state the harness cannot prove.**
 
-## Download
+## Distribution status
 
-Desktop builds are published on the
-[StarNet releases page](https://github.com/androoAGI/starnet-releases/releases/latest).
+This Stratagem fork is currently for internal engineering and source-based evaluation only.
+There are **no approved Stratagem desktop release artifacts yet**. Do not use upstream StarNet
+binaries as if they were builds of this fork.
 
-| Platform | Asset |
-| --- | --- |
-| **Windows** (10/11, 64-bit) | `StarNet_<version>_x64-setup.exe` |
-| **macOS — Apple Silicon** (M1–M4) | `StarNet_<version>_aarch64.dmg` |
-| **macOS — Intel** | `StarNet_<version>_x64.dmg` |
-
-> **Apple Silicon note:** use the native `aarch64` DMG. Avoid the `x64` DMG on Apple Silicon:
-> it runs under Rosetta 2 rather than using the native architecture.
-
-The public release train supports Windows and macOS. It refuses to stage a release unless the
-Windows installer passes Authenticode and timestamp verification, both Mac builds pass
-Developer ID checks and Apple notarization, and every updater artifact has a valid updater
-signature. Those are pipeline requirements, not proof that a particular downloaded or installed
-copy was tested on your machine; [INSTALL.md](INSTALL.md) explains what to verify and when to stop.
-Linux packages are internal build artifacts only and are not a supported public release target.
-
-> **Early release:** Windows is the most-tested desktop target. macOS has less real-world
-> coverage. Broken? Tell us:
-> **androo.agi@gmail.com**.
+Public or shareable distribution is blocked until the derivative has its own product identity,
+artwork, desktop identifier, signing identity, updater key, and Stratagem-controlled release
+channel. See [the release isolation audit](docs/STRATAGEM_RELEASE_ISOLATION_AUDIT.md).
 
 ## Run from source
 
@@ -90,7 +76,7 @@ Requirements: Node.js 18+ (Node.js 22 matches CI), Git. Rust and the
 The sidecar uses Node core modules only, so it runs without installing anything:
 
 ```bash
-git clone https://github.com/androoAGI/starnet.git
+git clone https://github.com/stratagem-group/starnet.git
 cd starnet
 node sidecar/index.js
 ```

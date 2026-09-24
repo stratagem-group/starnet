@@ -4,14 +4,14 @@
   "private": true,
   "description": "A local-first, gamified desktop harness for building and running real AI-agent teams.",
   "license": "MIT",
-  "author": "Andrew Sims",
+  "author": "Stratagem Group",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/androoAGI/starnet.git"
+    "url": "git+https://github.com/stratagem-group/starnet.git"
   },
-  "homepage": "https://github.com/androoAGI/starnet#readme",
+  "homepage": "https://github.com/stratagem-group/starnet#readme",
   "bugs": {
-    "url": "https://github.com/androoAGI/starnet/issues"
+    "url": "https://github.com/stratagem-group/starnet/issues"
   },
   "keywords": [
     "ai-agents",
@@ -174,5 +174,8 @@
   "overrides": {
     "adm-zip": "0.6.1",
     "sharp": "0.35.4"
-  }
+  },
+  "contributors": [
+    "Andrew Sims (upstream StarNet author)"
+  ]
 }

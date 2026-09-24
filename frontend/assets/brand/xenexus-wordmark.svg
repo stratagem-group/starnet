@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 946 160" role="img" aria-label="Xenexus">
+  <rect width="946" height="160" fill="none"/>
+  <g fill="#000">
+    <path d="M18 18h58l42 45 42-45h58l-69 69 69 55h-58l-42-37-42 37H18l69-55z"/>
+    <text x="226" y="118" font-family="Arial Black, Impact, sans-serif" font-size="112" font-weight="900" letter-spacing="6">ENEXUS</text>
+  </g>
+</svg>

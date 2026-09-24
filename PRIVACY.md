@@ -11,7 +11,7 @@ under *StarNet Credits* below, and nothing in this document changes for you unle
 them. This document is written in plain English and is grounded in an audit of the actual
 code — not aspirations.
 
-Support questions: androo.agi@gmail.com.
+Stratagem fork support: no public support channel is configured while the derivative remains internal.
 
 ## The short version
 
@@ -101,7 +101,7 @@ Automatic update checks are on by default. On first run and at the configured in
 desktop app fetches a single public manifest file from GitHub Releases:
 
 ```
-https://github.com/androoAGI/starnet-releases/releases/latest/download/latest.json
+https://github.com/stratagem-group/starnet-releases/releases/latest/download/latest.json
 ```
 
 This is a plain `GET` for a static file. **No user data, no identifier, and no telemetry are

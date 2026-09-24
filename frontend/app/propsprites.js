@@ -10739,13 +10739,13 @@ const PropSprites = (() => {
 
     /* ===================== FUNCTIONAL ===================== */
     // WORKSTATIONS — the agent's seat. Assign ONE agent; it walks here and sits to work when tasked.
-    { id: "desk", label: "DESK", cat: "workstation", tier: "functional", seat: true, w: 2, h: 1, animated: true, blocks: true, desc: D_WS },
-    { id: "desk2", label: "DESK ×2", cat: "workstation", tier: "functional", seat: true, w: 2, h: 1, animated: true, blocks: true, desc: D_WS },
-    { id: "console", label: "CONSOLE", cat: "workstation", tier: "functional", seat: true, w: 2, h: 1, animated: true, blocks: true, desc: D_WS },
-    { id: "consoleL", label: "CONSOLE L", cat: "workstation", tier: "functional", seat: true, w: 3, h: 1, animated: true, blocks: true, desc: D_WS },
+    { id: "desk", label: "WORKSTATION", cat: "workstation", tier: "functional", seat: true, w: 2, h: 1, animated: true, blocks: true, desc: D_WS },
+    { id: "desk2", label: "DUAL WORKSTATION", cat: "workstation", tier: "functional", seat: true, w: 2, h: 1, animated: true, blocks: true, desc: D_WS },
+    { id: "console", label: "COMMAND CONSOLE", cat: "workstation", tier: "functional", seat: true, w: 2, h: 1, animated: true, blocks: true, desc: D_WS },
+    { id: "consoleL", label: "COMMAND CONSOLE L", cat: "workstation", tier: "functional", seat: true, w: 3, h: 1, animated: true, blocks: true, desc: D_WS },
     { id: "pixelrig", label: "PIXEL RIG", cat: "workstation", tier: "functional", seat: true, w: 2, h: 1, animated: true, blocks: true, desc: D_WS },
     { id: "bench", label: "BENCH", cat: "workstation", tier: "functional", seat: true, w: 4, h: 1, animated: true, blocks: true, desc: D_WS },
-    { id: "workbench", label: "WORKBENCH", cat: "workstation", tier: "functional", w: 2, h: 1, animated: true, blocks: true, desc: "WORKBENCH — grants the room's agent shell + verify, so it can run and test real code. Pair it with a workstation in the same room." },
+    { id: "workbench", label: "ENGINEERING BENCH", cat: "workstation", tier: "functional", w: 2, h: 1, animated: true, blocks: true, desc: "WORKBENCH — grants the room's agent shell + verify, so it can run and test real code. Pair it with a workstation in the same room." },
     // WORKFLOW — how work enters, moves, routes, and leaves.
     // (id stays 'intake' — saves/routing keys never rename; INBOX is the user-facing word, mirroring OUTBOX)
     // Docks (2×2 floor machines) are SOLID: belts hook to their ring tiles (connectBelt's pathable
@@ -10753,7 +10753,7 @@ const PropSprites = (() => {
     // The 1×1 junctions below stay blocks:false: they sit ON a belt line (belt tile underneath),
     // and belts are walkable floor machinery by contract.
     { id: "intake", label: "INBOX", cat: "workflow", tier: "functional", w: 2, h: 2, animated: true, blocks: true, desc: "Your floor is a flowchart — work arrives at the INBOX, every BAY is an agent doing one step, and the belts you draw are the order the work flows. OUTSIDE work (a DM, a routine) arrives here and drops onto a belt. Orders you give in COMMS skip it — they land straight at the agent's BAY. You don't need one for an agent to work — a BAY alone is enough; the inbox is for watching outside work ride in." },
-    { id: "bay", label: "BAY", cat: "workflow", tier: "functional", w: 2, h: 2, animated: true, blocks: true, desc: "BAY — the agent dock. Click it, assign an agent — done: work for that agent lands here, no belts required. Add belts to watch work ride in from an INBOX (and finished work ride out to an OUTBOX). The props in its room become its powers." },
+    { id: "bay", label: "AGENT BAY", cat: "workflow", tier: "functional", w: 2, h: 2, animated: true, blocks: true, desc: "BAY — the agent dock. Click it, assign an agent — done: work for that agent lands here, no belts required. Add belts to watch work ride in from an INBOX (and finished work ride out to an OUTBOX). The props in its room become its powers." },
     { id: "filter", label: "FILTER", cat: "workflow", tier: "functional", w: 1, h: 1, animated: true, blocks: false, desc: "FILTER — sorts UNADDRESSED work by its content, sending each kind down a different belt lane. Work already bound to an agent rides straight home past it. Click it to set the routes." },
     { id: "merger", label: "MERGER", cat: "workflow", tier: "functional", w: 1, h: 1, animated: true, blocks: false, desc: "MERGER — a lane funnel: several belt lanes converge into one, and every crate rides straight on (K in, K out). It tidies the lanes — it never combines the jobs riding them; each still runs on its own. Nothing to configure." },
     { id: "splitter", label: "SPLITTER", cat: "workflow", tier: "functional", w: 1, h: 1, animated: true, blocks: false, desc: "SPLITTER — fans one work stream across its lanes to run several agents in parallel (load-balance)." },
@@ -10774,7 +10774,7 @@ const PropSprites = (() => {
     { id: "vault", label: "VAULT", cat: "capability", tier: "functional", w: 3, h: 2, animated: true, blocks: true, desc: D_FILES },
     { id: "rack", label: "RACK", cat: "capability", tier: "functional", w: 2, h: 1, animated: true, blocks: true, desc: D_FILES },
     { id: "shelf", label: "SHELF", cat: "capability", tier: "functional", w: 4, h: 1, animated: true, blocks: true, desc: D_FILES },
-    { id: "core", label: "CORE", cat: "capability", tier: "functional", w: 1, h: 2, animated: true, blocks: true, desc: D_MEM },
+    { id: "core", label: "MEMORY CORE", cat: "capability", tier: "functional", w: 1, h: 2, animated: true, blocks: true, desc: D_MEM },
     { id: "gigs_servercart", label: "SERVER CART", cat: "capability", tier: "functional", w: 1, h: 1, animated: true, blocks: true, desc: D_MEM },
     { id: "bridge_relaystack", label: "RELAY STACK", cat: "capability", tier: "functional", w: 1, h: 2, animated: true, blocks: true, desc: D_MEM },
     { id: "studio", label: "STUDIO", cat: "capability", tier: "functional", w: 2, h: 2, animated: true, blocks: true, desc: "CAPABILITY — gives the agent in this room a media studio (generate & analyze images). It glows magenta while an image renders." },
@@ -10783,29 +10783,29 @@ const PropSprites = (() => {
     // COMMAND — mission surfaces (functional-but-not-capability: they grant no tools; they make the
     // station's real state readable + clickable. The workstation-model rule: functional props that aren't
     // capability objects get their own category, never mixed into cosmetics).
-    { id: "missionboard", label: "MISSION BOARD", cat: "command", tier: "functional", w: 3, h: 1, animated: true, blocks: false, desc: "MISSION BOARD — the quest log made physical. Every pinned card is a real open quest; click the board to read them. It suggests, never gates." },
+    { id: "missionboard", label: "COMMAND BOARD", cat: "command", tier: "functional", w: 3, h: 1, animated: true, blocks: false, desc: "MISSION BOARD — the quest log made physical. Every pinned card is a real open quest; click the board to read them. It suggests, never gates." },
     { id: "trophycase", label: "TROPHY CASE", cat: "command", tier: "functional", w: 2, h: 2, animated: true, blocks: true, desc: "TROPHY CASE — the station's real achievements made permanent. Earned milestones, completed quests, and your living tools stand behind glass; click to open the case. It grants nothing — it remembers." },
 
     /* ===================== COSMETIC ===================== */
     // SCREENS — ops & display dressing.
-    { id: "bridge_consolebank", label: "BRIDGE CONSOLE BANK", cat: "screens", tier: "cosmetic", w: 9, h: 1, animated: false, blocks: true, mount: 'wall', desc: "Decorative instrument bank with cyan navigation displays. Fits against a north wall; grants no tools." },
-    { id: "bridge_tacticaltable", label: "TACTICAL TABLE", cat: "screens", tier: "cosmetic", w: 7, h: 4, animated: false, blocks: true, desc: "Decorative octagonal navigation table in worn steel and dark cyan glass." },
+    { id: "bridge_consolebank", label: "COMMAND CONSOLE BANK", cat: "screens", tier: "cosmetic", w: 9, h: 1, animated: false, blocks: true, mount: 'wall', desc: "Decorative instrument bank with cyan navigation displays. Fits against a north wall; grants no tools." },
+    { id: "bridge_tacticaltable", label: "OPS TABLE", cat: "screens", tier: "cosmetic", w: 7, h: 4, animated: false, blocks: true, desc: "Decorative octagonal navigation table in worn steel and dark cyan glass." },
     { id: "bridge_equipmentbay", label: "EQUIPMENT BAY", cat: "storage", tier: "cosmetic", w: 4, h: 1, animated: false, blocks: true, desc: "Decorative armored equipment cabinet with brass handles and recessed instruments." },
     { id: "bridge_deckperimeter", label: "DECK PERIMETER", cat: "decor", tier: "cosmetic", w: 12, h: 8, animated: false, blocks: false, flat: true, desc: "Worn hazard perimeter painted on the deck. Walkable; furniture may stand inside or across it." },
-    { id: "bigscreen", label: "BIG SCREEN", cat: "screens", tier: "cosmetic", w: 8, h: 1, animated: true, blocks: false },
+    { id: "bigscreen", label: "OPS DISPLAY", cat: "screens", tier: "cosmetic", w: 8, h: 1, animated: true, blocks: false },
     { id: "holotable", label: "HOLOTABLE", cat: "screens", tier: "cosmetic", w: 4, h: 2, animated: true, blocks: true },
     { id: "screens", label: "SCREENS", cat: "screens", tier: "cosmetic", w: 2, h: 1, animated: true, blocks: false },
     { id: "tank", label: "TANK", cat: "screens", tier: "cosmetic", w: 2, h: 1, animated: true, blocks: true },
     { id: "whiteboard", label: "WHITEBOARD", cat: "screens", tier: "cosmetic", w: 4, h: 1, animated: true, blocks: false },
     { id: "ticker", label: "TICKER", cat: "screens", tier: "cosmetic", w: 4, h: 1, animated: true, blocks: false },
-    { id: "chartwall", label: "CHART WALL", cat: "screens", tier: "cosmetic", w: 3, h: 1, animated: true, blocks: false },
-    { id: "wartable", label: "WAR TABLE", cat: "screens", tier: "cosmetic", w: 5, h: 2, animated: true, blocks: true },
-    { id: "calwall", label: "CAL WALL", cat: "screens", tier: "cosmetic", w: 6, h: 1, animated: true, blocks: false },
-    { id: "bridge_tacscreen", label: "TAC SCREEN", cat: "screens", tier: "cosmetic", w: 2, h: 1, animated: true, blocks: false },
+    { id: "chartwall", label: "ANALYTICS WALL", cat: "screens", tier: "cosmetic", w: 3, h: 1, animated: true, blocks: false },
+    { id: "wartable", label: "OPS TABLE", cat: "screens", tier: "cosmetic", w: 5, h: 2, animated: true, blocks: true },
+    { id: "calwall", label: "SCHEDULE WALL", cat: "screens", tier: "cosmetic", w: 6, h: 1, animated: true, blocks: false },
+    { id: "bridge_tacscreen", label: "TACTICAL DISPLAY", cat: "screens", tier: "cosmetic", w: 2, h: 1, animated: true, blocks: false },
     { id: "bridge_dispatch_pylon", label: "DISPATCH PYLON", cat: "screens", tier: "cosmetic", w: 1, h: 2, animated: true, blocks: true },
     { id: "bridge_orderqueue", label: "ORDER QUEUE", cat: "screens", tier: "cosmetic", w: 2, h: 1, animated: true, blocks: true },
     { id: "war_pivotpanel", label: "PIVOT PANEL", cat: "screens", tier: "cosmetic", w: 2, h: 1, animated: true, blocks: true },
-    { id: "war_threatcore", label: "THREAT CORE", cat: "screens", tier: "cosmetic", w: 1, h: 2, animated: true, blocks: true },
+    { id: "war_threatcore", label: "RISK CORE", cat: "screens", tier: "cosmetic", w: 1, h: 2, animated: true, blocks: true },
     // LAB — research & craft dressing.
     { id: "fabricator", label: "FABRICATOR", cat: "lab", tier: "cosmetic", w: 3, h: 2, animated: true, blocks: true },
     { id: "vat", label: "VAT", cat: "lab", tier: "cosmetic", w: 3, h: 2, animated: true, blocks: true },
@@ -11796,12 +11796,12 @@ const PropSprites = (() => {
         }
         const x=(p.x+(p.w||1)/2)*TILE,anchor=p.y*TILE-surfaceLift(p)+1,h=11;
         const left=x-width/2,top=anchor-h/2;
-        ctx.fillStyle='#11191d';ctx.fillRect(left,top,width,h);
-        ctx.strokeStyle='#657077';ctx.lineWidth=.35;ctx.strokeRect(left,top,width,h);
-        ctx.strokeStyle='#28353c';ctx.strokeRect(left+.7,top+.7,width-1.4,h-1.4);
+        ctx.fillStyle='#07111a';ctx.fillRect(left,top,width,h);
+        ctx.strokeStyle='#2e6683';ctx.lineWidth=.35;ctx.strokeRect(left,top,width,h);
+        ctx.strokeStyle='#113449';ctx.strokeRect(left+.7,top+.7,width-1.4,h-1.4);
         // A small cyan rail ties the plate to the station's screen language.
-        ctx.strokeStyle='#64a7af';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(left+2,top+h-1.1);ctx.lineTo(left+width-2,top+h-1.1);ctx.stroke();
-        ctx.font=layout.font+"px 'VT323','Courier New',monospace";ctx.fillStyle='#d4e0e3';
+        ctx.strokeStyle='#28b8ff';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(left+2,top+h-1.1);ctx.lineTo(left+width-2,top+h-1.1);ctx.stroke();
+        ctx.font=layout.font+"px 'VT323','Courier New',monospace";ctx.fillStyle='#d9f4ff';
         layout.lines.forEach((line,i)=>ctx.fillText(line,x,anchor+(i-(layout.lines.length-1)/2)*4.5-.25));
       }
     } finally { ctx.restore(); }

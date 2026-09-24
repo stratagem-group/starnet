@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="Xenexus AI Operations Command">
+  <defs>
+    <linearGradient id="gold" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#ffe347"/>
+      <stop offset="1" stop-color="#f2b500"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="360" fill="none"/>
+  <g transform="translate(24 38)" filter="url(#glow)">
+    <path d="M10 8h96l68 76 68-76h96L224 122l114 102h-96l-68-62-68 62H10l114-102z" fill="url(#gold)" stroke="#06111e" stroke-width="18"/>
+    <path d="M33 23h50l91 99 91-99h50" fill="none" stroke="#17a8ff" stroke-width="14"/>
+    <text x="338" y="166" font-family="Arial Black, Impact, sans-serif" font-size="150" font-weight="900" letter-spacing="5" fill="url(#gold)" stroke="#06111e" stroke-width="10" paint-order="stroke">ENEXUS</text>
+    <rect x="350" y="192" width="805" height="72" rx="6" fill="#f5f7fa" stroke="#17a8ff" stroke-width="8"/>
+    <text x="752" y="244" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="44" letter-spacing="6" fill="#06111e">AI OPERATIONS COMMAND</text>
+  </g>
+</svg>

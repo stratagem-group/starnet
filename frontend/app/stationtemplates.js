@@ -3,32 +3,32 @@
 'use strict';
 const StationTemplates = (() => {
   const catalog = [
-    { id: 'default', name: 'DEFAULT', rooms: 1, description: 'One open room. All five essentials, your workstation, and space to grow.', wings: [] },
-    { id: 'retreat', name: 'QUIET RETREAT', rooms: 2, description: 'Your home station with a quiet library and lounge to the south.', wings: [['reading','south']] },
-    { id: 'cozy', name: 'COZY WORKSHOP', rooms: 3, description: 'Warm wood floors, a furnished lounge, and an Inbox → Bay → Outbox conveyor workshop. Assign an agent to the bay to use the line.', wings: [['cozyWorkshop','north'],['cozyLounge','south']] },
-    { id: 'creative', name: 'CREATIVE STUDIO', rooms: 3, description: 'A warm design studio and a review room with an Inbox → Draft → Review → Outbox conveyor. Assign agents to the two prepared steps.', wings: [['creative','north'],['creativeReview','east']] },
-    { id: 'research', name: 'RESEARCH STATION', rooms: 3, description: 'An analysis lab to the north and a dedicated reference archive to the east.', wings: [['research','north'],['archive','east']] },
-    { id: 'engineering', name: 'ENGINEERING STATION', rooms: 5, description: 'Workshop, analysis lab, review room, and quiet lounge around your home station.', wings: [['engineering','west'],['review','east'],['research','north'],['reading','south']] },
-    { id: 'operations', name: 'OPERATIONS STATION', rooms: 5, description: 'Planning, communications, reference, and review rooms around a central home station.', wings: [['archive','west'],['comms','east'],['planning','north'],['review','south']] }
+    { id: 'default', name: 'COMMAND CORE', rooms: 1, description: 'One open Xenexus command room with the essentials, your workstation, and space to grow.', wings: [] },
+    { id: 'retreat', name: 'QUIET ARCHIVE', rooms: 2, description: 'A command room paired with a quiet archive and reading space to the south.', wings: [['reading','south']] },
+    { id: 'cozy', name: 'ENGINEERING NODE', rooms: 3, description: 'An engineering room, crew lounge, and Inbox → Bay → Outbox work line. Assign an agent to the bay to use the line.', wings: [['cozyWorkshop','north'],['cozyLounge','south']] },
+    { id: 'creative', name: 'CREATIVE NODE', rooms: 3, description: 'A creative lab and review room with an Inbox → Draft → Review → Outbox conveyor. Assign agents to the two prepared steps.', wings: [['creative','north'],['creativeReview','east']] },
+    { id: 'research', name: 'RESEARCH NODE', rooms: 3, description: 'A research lab to the north and a dedicated archives room to the east.', wings: [['research','north'],['archive','east']] },
+    { id: 'engineering', name: 'ENGINEERING COMPLEX', rooms: 5, description: 'Engineering, research, review, and archives rooms around the command core.', wings: [['engineering','west'],['review','east'],['research','north'],['reading','south']] },
+    { id: 'operations', name: 'OPERATIONS COMPLEX', rooms: 5, description: 'Command, communications, archives, and review rooms around the Xenexus core.', wings: [['archive','west'],['comms','east'],['planning','north'],['review','south']] }
   ];
   const rooms = {
-    cozyWorkshop: { name: 'WORKROOM', kind: 'factory', floorStyle: 'walnut', floorMat: 'plank', blueprint: ['front_desk',3,1], props: [['plant',1,1],['plant',16,1],['desk',2,7],['industrial_drawerbank',12,7],['bookshelf',14,9]] },
-    cozyLounge: { name: 'LOUNGE', kind: 'quarters', floorStyle: 'walnut', floorMat: 'plank', props: [['tv',2,1],['rug',1,2],['couch',1,5],['industrial_roundtable',11,4],['dinerchair',10,4,3],['dinerchair',13,4,1],['coffee',14,4],['bookshelf',12,1],['plant',16,1],['bunk',13,7],['plant',1,8]] },
-    reading: { name: 'LIBRARY', kind: 'quarters', floorStyle: 'walnut', floorMat: 'plank', props: [['couch',1,1],['bookshelf',13,1],['plant',16,8],['industrial_roundtable',2,4]] },
-    creative: { name: 'DESIGN STUDIO', kind: 'lab', floorStyle: 'walnut', floorMat: 'plank', props: [['desk',2,1],['easel',11,1],['plant',0,1],['plant',16,1],['bookshelf',1,8],['industrial_drawerbank',1,6],['industrial_roundtable',12,7],['dinerchair',11,7,3],['dinerchair',14,7,1]] },
-    creativeReview: { name: 'DRAFT & REVIEW', kind: 'hab', floorStyle: 'ash', floorMat: 'plank', props: [['desk',2,8],['industrial_roundtable',11,7],['dinerchair',10,7,3],['dinerchair',13,7,1],['bookshelf',15,8],['plant',16,5]], workflow: {
+    cozyWorkshop: { name: 'ENGINEERING', kind: 'factory', floorStyle: 'cobalt', floorMat: 'tread', blueprint: ['front_desk',3,1], props: [['plant',1,1],['plant',16,1],['desk',2,7],['industrial_drawerbank',12,7],['bookshelf',14,9]] },
+    cozyLounge: { name: 'CREW LOUNGE', kind: 'quarters', floorStyle: 'indigo', floorMat: 'soft', props: [['tv',2,1],['rug',1,2],['couch',1,5],['industrial_roundtable',11,4],['dinerchair',10,4,3],['dinerchair',13,4,1],['coffee',14,4],['bookshelf',12,1],['plant',16,1],['bunk',13,7],['plant',1,8]] },
+    reading: { name: 'ARCHIVES', kind: 'quarters', floorStyle: 'indigo', floorMat: 'resin', props: [['couch',1,1],['bookshelf',13,1],['plant',16,8],['industrial_roundtable',2,4]] },
+    creative: { name: 'CREATIVE LAB', kind: 'lab', floorStyle: 'cobalt', floorMat: 'resin', props: [['desk',2,1],['easel',11,1],['plant',0,1],['plant',16,1],['bookshelf',1,8],['industrial_drawerbank',1,6],['industrial_roundtable',12,7],['dinerchair',11,7,3],['dinerchair',14,7,1]] },
+    creativeReview: { name: 'REVIEW', kind: 'hab', floorStyle: 'indigo', floorMat: 'resin', props: [['desk',2,8],['industrial_roundtable',11,7],['dinerchair',10,7,3],['dinerchair',13,7,1],['bookshelf',15,8],['plant',16,5]], workflow: {
       label: 'CREATIVE · DRAFT & REVIEW',
       steps: [
         'Draft a response to the incoming creative brief. Follow its audience, format, tone, and constraints. Make a complete first draft, flag assumptions, and pass the draft and original requirements to the reviewer.',
         'Review the incoming draft against the original creative brief. Correct clarity, consistency, and unsupported claims while preserving the requested voice. Return the finished version and briefly flag anything that still needs a human decision.'
       ]
     } },
-    review: { name: 'REVIEW', kind: 'hab', floorStyle: 'ash', floorMat: 'resin', props: [['desk',2,1],['whiteboard',11,0],['plant',16,1],['industrial_roundtable',7,4]] },
-    research: { name: 'ANALYSIS', kind: 'lab', floorStyle: 'teal', floorMat: 'resin', props: [['desk',3,1],['research_samplecart',12,1],['plant',16,1],['bookshelf',2,8],['bookshelf',12,8]] },
-    engineering: { name: 'WORKSHOP', kind: 'factory', floorStyle: 'hull', floorMat: 'tread', props: [['desk',3,1],['fabricator',11,1],['industrial_drawerbank',2,8],['crate',13,8]] },
-    planning: { name: 'PLANNING', kind: 'bridge', floorStyle: 'cobalt', floorMat: 'resin', props: [['consoleL',2,1],['missionboard',7,0],['desk',13,1],['holotable',7,6],['plant',16,8]] },
-    comms: { name: 'COMMS', kind: 'bridge', floorStyle: 'hull', floorMat: 'resin', props: [['consoleL',3,1],['screens',10,0],['rack',12,1],['plant',16,1]] },
-    archive: { name: 'ARCHIVE', kind: 'hab', floorStyle: 'walnut', floorMat: 'plank', props: [['bookshelf',2,1],['bookshelf',6,1],['bookshelf',10,1],['plant',16,1],['desk',3,7]] }
+    review: { name: 'REVIEW', kind: 'hab', floorStyle: 'cobalt', floorMat: 'resin', props: [['desk',2,1],['whiteboard',11,0],['plant',16,1],['industrial_roundtable',7,4]] },
+    research: { name: 'RESEARCH', kind: 'lab', floorStyle: 'cobalt', floorMat: 'resin', props: [['desk',3,1],['research_samplecart',12,1],['plant',16,1],['bookshelf',2,8],['bookshelf',12,8]] },
+    engineering: { name: 'ENGINEERING', kind: 'factory', floorStyle: 'cobalt', floorMat: 'tread', props: [['desk',3,1],['fabricator',11,1],['industrial_drawerbank',2,8],['crate',13,8]] },
+    planning: { name: 'COMMAND', kind: 'bridge', floorStyle: 'cobalt', floorMat: 'resin', props: [['consoleL',2,1],['missionboard',7,0],['desk',13,1],['holotable',7,6],['plant',16,8]] },
+    comms: { name: 'COMMS', kind: 'bridge', floorStyle: 'indigo', floorMat: 'resin', props: [['consoleL',3,1],['screens',10,0],['rack',12,1],['plant',16,1]] },
+    archive: { name: 'ARCHIVES', kind: 'hab', floorStyle: 'cobalt', floorMat: 'resin', props: [['bookshelf',2,1],['bookshelf',6,1],['bookshelf',10,1],['plant',16,1],['desk',3,7]] }
   };
   const slots = {
     east: { x:21, y:0, hall:{x1:18,y1:4,x2:20,y2:6} },
@@ -37,7 +37,7 @@ const StationTemplates = (() => {
     south: { x:0, y:14, hall:{x1:7,y1:11,x2:10,y2:13} }
   };
   const creativeExample = Object.freeze({
-    title: 'Creative Studio',
+    title: 'Creative Node',
     purpose: 'Turn a short creative brief into a draft, then have a second agent review it before it reaches the outbox.',
     sample: 'SAMPLE JOB: Write a friendly launch announcement for a fictional community garden. Include a headline and three short sentences. Do not invent a date, location, or website. The reviewer should check those constraints and deliver the finished announcement.',
     roles: [

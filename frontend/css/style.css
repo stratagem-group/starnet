@@ -113,6 +113,15 @@ body.theme-amber {
   --gold: #ffd34a; --ph-rgb: 255, 170, 51; --ph-bright-rgb: 255, 228, 180; --gold-rgb: 255, 211, 74;
   --cam-grade: saturate(1.06) contrast(1.1) brightness(0.94);
 }
+body.theme-xenexus {
+  /* XENEXUS — internal command palette: blue/cyan structure, yellow/gold command accents.
+     Semantic success/error colours remain --ok/--bad and are intentionally not repurposed as brand colour. */
+  --ph: #28b8ff; --ph-bright: #d9f4ff; --ph-dim: #1676a9; --ph-faint: #071d2b;
+  --ink: #02070d; --ph-glow: rgba(40,184,255,0.48); --ph-glow2: rgba(40,184,255,0.15);
+  --bg: #010308; --panel: rgba(2,8,16,0.95); --panel2: #06111e; --warn: #ffe347; --text: #9ed7f1;
+  --gold: #ffd52f; --ph-rgb: 40,184,255; --ph-bright-rgb: 217,244,255; --gold-rgb: 255,213,47;
+  --cam-grade: saturate(1.02) contrast(1.12) brightness(0.96);
+}
 body.theme-green {
   --ph: #3dff70; --ph-bright: #ccffdb; --ph-dim: #1fae4e; --ph-faint: #0c3a1d;
   --ink: #021407; --ph-glow: rgba(61, 255, 112, 0.45); --ph-glow2: rgba(61,255,112,0.14);
@@ -392,8 +401,8 @@ body:has(#screen-game.active):not(.refit-on) #logo { display: flex; }
 .logo-img {
   height: 30px; aspect-ratio: 946 / 160; display: block;
   background-color: var(--ph);
-  -webkit-mask: url(../assets/brand/starnet-wordmark.svg) center / contain no-repeat;
-          mask: url(../assets/brand/starnet-wordmark.svg) center / contain no-repeat;
+  -webkit-mask: url(../assets/brand/xenexus-wordmark.svg) center / contain no-repeat;
+          mask: url(../assets/brand/xenexus-wordmark.svg) center / contain no-repeat;
 }
 /* one confident wordmark in the chrome — the big ASCII logo lives on the
    title screen where it has room to read (salvaged from agent/design-system) */

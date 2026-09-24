@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Xenexus emblem">
+  <defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffe347"/><stop offset="1" stop-color="#f2b500"/></linearGradient></defs>
+  <circle cx="256" cy="256" r="232" fill="#06111e" stroke="#17a8ff" stroke-width="22"/>
+  <circle cx="256" cy="256" r="188" fill="#02060b" stroke="#0b5fa5" stroke-width="10"/>
+  <path d="M96 104h88l72 88 72-88h88L306 256l110 152h-88l-72-88-72 88H96l110-152z" fill="url(#g)" stroke="#0b1623" stroke-width="18"/>
+  <path d="M256 225l31 31-31 31-31-31z" fill="#17a8ff"/>
+</svg>

@@ -213,7 +213,7 @@
         <div class="ext-choices" aria-label="Add an extension">
           <button class="ext-choice" data-ext-editor="hook" aria-controls="hk-form" aria-expanded="false">
             <span class="ext-choice-icon" aria-hidden="true">⌁</span>
-            <span><b>Run a command automatically</b><small>Choose when StarNet runs your script.</small></span><span aria-hidden="true">＋</span>
+            <span><b>Run a command automatically</b><small>Choose when Xenexus runs your script.</small></span><span aria-hidden="true">＋</span>
           </button>
           <button class="ext-choice" data-ext-editor="plugin" aria-controls="pl-form" aria-expanded="false">
             <span class="ext-choice-icon" aria-hidden="true">⌘</span>
@@ -324,7 +324,7 @@
       { id: 'keys', label: 'SAVED API CONNECTIONS', glyph: '⊟', desc: 'The platform credentials your agents actually hold, plus a safe drop for a custom API the catalog does not list.', build: frag(secKeys) },
       { id: 'mcp', label: 'CONNECTED SERVICES', glyph: '⧉', desc: 'Manage service access, check connection status, and reconnect when needed.', build: frag(secMcp) },
       { id: 'custom', label: 'CREATE / ADVANCED', glyph: '＋', desc: 'Configure a custom server, API, skill package, hook or plugin.', build: frag('<div class="ab-router-grid"><button class="ab-route" data-ab-to="mcp">Add a custom MCP server</button><button class="ab-route" data-ab-to="keys">Add a custom API key</button><button class="ab-route" data-ab-to="exchange">Import a skill package</button><button class="ab-route" data-ab-to="extensions">Create hooks and plugins</button></div>') },
-      { id: 'extensions', label: 'EXTENSIONS', glyph: '⌥', desc: 'Automate a step or extend StarNet with your own code.', build: frag(secExt) }
+      { id: 'extensions', label: 'EXTENSIONS', glyph: '⌥', desc: 'Automate a step or extend Xenexus with your own code.', build: frag(secExt) }
     ].concat(lanes.reduce((acc, l) => acc.concat(l.sections), [])), {
       search: true,
       groups: [
@@ -919,7 +919,7 @@
         if (storageError) {
           overview.textContent = 'Saved services unavailable';
           notices.innerHTML += '<div class="mc-notice"><b>Credential storage</b>' + esc(storageError) + '</div>';
-          listEl.innerHTML = '<div class="mc-detail">Your saved connections have not been erased. Unlock the credential store and restart StarNet.</div>';
+          listEl.innerHTML = '<div class="mc-detail">Your saved connections have not been erased. Unlock the credential store and restart Xenexus.</div>';
           return;
         }
         if (list.length) {

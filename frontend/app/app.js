@@ -9,15 +9,15 @@ const App = (() => {
   // contexts are safe); keep the null-guard the old local copy had so U.esc(null) never renders "null".
   const esc = s => U.esc(s == null ? '' : s);
   // CRT-muted crew suit tints — distinct per crew member but passed through the amber-phosphor grade (no pure neons). Last entry stays gold to match ORCH_COLOR.
-  const SUITS = ['#6fb3bf', '#7bc88a', '#d99a5a', '#a888c0', '#cf7d96', '#ffd34a'];
+  const SUITS = ['#28b8ff', '#1676a9', '#ffd52f', '#4d7b88', '#d9f4ff', '#0b5fa5'];
 
   let agent = null;           // the FOCUSED agent — COMMS + camera target. Every existing `agent.` reference still
                               //   reads "the agent in front of you"; summon adds more, focus repoints this pointer.
   const agents = new Map();   // agentId -> agent object (hero + summoned crew) — the live multi-agent roster
   let resumingSaved = null;   // a save awaiting a re-entered key
-  const ORCH_COLOR = '#ffd34a';   // the Orchestrator's suit tint — gold marks the lead (same gold as SUITS' last entry). No color picker any more (skins are the visual identity); summoned crew cycle SUITS.
+  const ORCH_COLOR = '#ffd52f';   // the Orchestrator's suit tint — gold marks the lead (same gold as SUITS' last entry). No color picker any more (skins are the visual identity); summoned crew cycle SUITS.
   let pickedColor = ORCH_COLOR;
-  let pickedSkin = (typeof DATA !== 'undefined' && DATA.DEFAULT_SKIN) || 'bear';   // the sprite set the new agent will wear
+  let pickedSkin = (typeof DATA !== 'undefined' && DATA.DEFAULT_SKIN) || 'xenexus_command';   // the sprite set the new agent will wear
   let pickedPersona = (typeof Personas !== 'undefined') ? Personas.DEFAULT_ID : 'professional';
   let pickedTraits = {};        // the VOICE & MANNER fine-tune dials (warmth/humor/formality/length + emoji/blunt) — only set keys contribute prompt text
   let pickedCustomVoice = '';   // the Commander's free-text "in their own words" voice note (optional)
@@ -231,7 +231,7 @@ const App = (() => {
     // sidecar/capability/office.js + capgate F1). So the identity must NOT promise web/files unconditionally; it
     // tells the agent to use whatever it's actually been granted and to SAY when a tool is missing (that's the
     // signal that teaches the Commander what to place next), never to pretend a reach it doesn't have.
-    let s = 'You are ' + name + ', an AI agent operating from a workstation aboard the STARNET station — a room '
+    let s = 'You are ' + name + ', an AI agent operating from a workstation aboard the XENEXUS station — a room '
       + 'your Commander (the user) is building for you. Address the user as "Commander" and keep a spark of personality. '
       + 'Your workstation grants you REAL tools — exactly the ones the Commander has placed in your room (web search/read, '
       + 'file read/write, a terminal, memory, and more as the station grows; compute to think is always yours). When the '
@@ -1617,7 +1617,7 @@ const App = (() => {
      surface that choice up-front so the Commander sets the whole station's colour the moment they build
      it — picking a swatch recolours live AND writes through StationUI.setTheme so it survives enterGame
      and stays in lockstep with the in-game Settings panel. No new state, no fakery. */
-  const PHOSPHOR = Object.freeze([['amber', '#ffaa33'], ['green', '#3dff70'], ['blue', '#46c8ff'], ['purple', '#b46bff'], ['red', '#ff4136'], ['white', '#e8f0e8']]);
+  const PHOSPHOR = Object.freeze([['xenexus', '#28b8ff'], ['amber', '#ffaa33'], ['green', '#3dff70'], ['blue', '#46c8ff'], ['purple', '#b46bff'], ['red', '#ff4136'], ['white', '#e8f0e8']]);
   // THE APPROVAL MODE — the crucial pick for the everything-orchestrator: how much it can do on its own. This is
   // NOT cosmetic — it drives the REAL consent broker in the sidecar (full → bypass the gate; ask → prompt on any
   // mutation/network call), threaded through pushRoster → /api/roster. `np` is the nameplate readout.
@@ -1627,15 +1627,15 @@ const App = (() => {
   ]);
   const approvalById = id => APPROVAL.find(a => a.id === id) || APPROVAL[0];
   function applyTheme(t) {
-    document.body.classList.remove('theme-amber', 'theme-green', 'theme-blue', 'theme-purple', 'theme-red', 'theme-white', 'theme-custom');
+    document.body.classList.remove('theme-xenexus', 'theme-amber', 'theme-green', 'theme-blue', 'theme-purple', 'theme-red', 'theme-white', 'theme-custom');
     document.body.classList.add('theme-' + t);
     // 'custom' carries no palette in CSS — its derived vars are inline on <body>, set by
     // StationUI.applySettings at init and cleared by StationUI.setTheme when a preset is picked here.
   }
   function buildPhosphor() {
     const wrap = el('phosphor-swatches'); if (!wrap) return;
-    let cur = 'amber';
-    try { if (typeof StationUI !== 'undefined' && StationUI.getTheme) cur = StationUI.getTheme() || 'amber'; } catch (_) {}
+    let cur = 'xenexus';
+    try { if (typeof StationUI !== 'undefined' && StationUI.getTheme) cur = StationUI.getTheme() || 'xenexus'; } catch (_) {}
     applyTheme(cur);   // reflect a previously-saved tint on the create screen too (StationUI hasn't entered yet)
     wrap.innerHTML = '';
     PHOSPHOR.forEach(([t, c]) => {
@@ -2372,7 +2372,7 @@ const App = (() => {
     // 10th behind nine characters. Data order (data-shim.js) is untouched; this is purely the render order.
     const def = DATA.DEFAULT_SKIN;
     const inFamily = id => id === def || id.indexOf(def + '_') === 0;
-    const ids = Object.keys(DATA.SKINS);
+    const ids = Object.keys(DATA.SKINS).filter(id => DATA.SKINS[id] && DATA.SKINS[id].visible !== false);
     const ordered = [def, ...ids.filter(id => id !== def && inFamily(id)), ...ids.filter(id => !inFamily(id))].filter(id => DATA.SKINS[id]);
     // stage handle (assigned by the mount below): drive THIS stage, not the module-level shortcut, which
     // belongs to whichever picker mounted last once more than one is on screen.

@@ -5092,7 +5092,7 @@ const StationBake = (() => {
       { wallUp: WALL.up, corUp: WALL.corUp, infillFixtures: projectionPresentation, viewport: { x: VX, y: VY, w: CW, h: CH } });
 
     // faint room name plates (the v7 floor-code stencil, generalized)
-    b.font = "7px 'VT323','Courier New',monospace"; b.fillStyle = 'rgba(255,255,255,0.07)'; b.textAlign = 'left';
+    b.font = "7px 'VT323','Courier New',monospace"; b.fillStyle = 'rgba(40,184,255,0.16)'; b.textAlign = 'left';
     for (const id of G.ROOM_IDS) {
       const z = G.zones[id]; if (!z) continue;
       const nm = (G.nameOf(id) || '').toUpperCase();

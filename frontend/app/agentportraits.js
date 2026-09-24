@@ -3,6 +3,10 @@
 'use strict';
 const AgentPortraits = (() => {
   const cache = new Map();
+  function explicitPortrait(skin) {
+    const src = skin && skin.portrait;
+    return typeof src === 'string' && src ? src : null;
+  }
   function crop(set) {
     if (cache.has(set)) return cache.get(set);
     const promise = new Promise(resolve => {
@@ -32,8 +36,20 @@ const AgentPortraits = (() => {
     const skin = agent && skins && ((agent.id === 'ULTRON' && skins.ultron) || skins[agent.skin] || skins[DATA.DEFAULT_SKIN]);
     const set = skin && skin.set;
     if (!set) { delete img.dataset.portraitSet; img.hidden = true; return; }
-    if (img.dataset.portraitSet === set) return;
-    img.dataset.portraitSet = set; img.hidden = true;
+    const portrait = explicitPortrait(skin);
+    const portraitKey = portrait || set;
+    if (img.dataset.portraitSet === portraitKey) return;
+    img.dataset.portraitSet = portraitKey; img.hidden = true;
+    if (portrait) {
+      img.src = portrait;
+      img.onload = () => { if (img.dataset.portraitSet === portraitKey && img.isConnected) img.hidden = false; };
+      img.onerror = () => {
+        if (img.dataset.portraitSet !== portraitKey || !img.isConnected) return;
+        img.dataset.portraitSet = set;
+        crop(set).then(src => { if (img.dataset.portraitSet === set && img.isConnected && src) { img.src = src; img.hidden = false; } });
+      };
+      return;
+    }
     crop(set).then(src => {
       if (img.dataset.portraitSet !== set || !img.isConnected) return;
       if (src) { img.src = src; img.hidden = false; }
