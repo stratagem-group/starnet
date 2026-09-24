@@ -501,7 +501,7 @@
      title screen keeps the full-size master PNG, where the ASCII-digit texture actually reads. -->
 <div id="logo"><span class="logo-img" role="img" aria-label="XENEXUS"></span></div>
 
-<section id="screen-game" class="screen">
+<section id="screen-game" class="screen xenexus-command-shell">
 
   <header id="topbar">
     <div id="logo-anchor" aria-hidden="true"></div>
@@ -537,7 +537,7 @@
   <aside id="left">
     <!-- The head carried an "N AGENTS" count that #crew-sum already implied one panel lower
          ("0 WORKING / 2 IDLE" totals the same roster and says more). Dropped 2026-07-27 — one fact, one place. -->
-    <h3>▮ CREW<span class="crew-h3-right"><button id="crew-search-toggle" class="crew-hide" type="button" title="Find an agent" aria-label="Find an agent" aria-expanded="false" aria-controls="crew-search-wrap">⌕</button><button id="crew-hide" class="crew-hide" type="button" title="Hide the crew rail" aria-label="Hide the crew rail" aria-expanded="true">◂</button></span></h3>
+    <h3>▮ AGENTS<span class="crew-h3-right"><button id="crew-search-toggle" class="crew-hide" type="button" title="Find an agent" aria-label="Find an agent" aria-expanded="false" aria-controls="crew-search-wrap">⌕</button><button id="crew-hide" class="crew-hide" type="button" title="Hide the agents rail" aria-label="Hide the agents rail" aria-expanded="true">◂</button></span></h3>
     <div id="crew-search-wrap" class="crew-search-wrap" hidden>
       <input id="crew-search" type="search" placeholder="Find an agent…" aria-label="Find an agent by name" autocomplete="off" aria-controls="crew">
       <button id="crew-search-close" type="button" aria-label="Close agent search" title="Close agent search">✕</button>
@@ -568,6 +568,7 @@
   <div id="stage-wrap">
     <canvas id="stage" role="img" aria-label="Live view of your agent station" aria-describedby="stage-summary"></canvas>
     <div id="stage-summary" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div class="x-stage-id" aria-hidden="true"><span>XENEXUS</span><small>LIVE STATION</small></div>
     <div class="cam-hud">
       <span class="cam-c cam-tl">┌</span><span class="cam-c cam-tr">┐</span>
       <span class="cam-c cam-bl">└</span><span class="cam-c cam-br">┘</span>
@@ -577,7 +578,7 @@
     </div>
     <!-- CREW rail restore handle (leftrail.js): a slim phosphor drawer tab on the stage's left edge,
          visible only while the rail is hidden -->
-    <button id="crew-show" class="crew-show" type="button" title="Show the crew rail" aria-label="Show the crew rail" hidden>▸ CREW</button>
+    <button id="crew-show" class="crew-show" type="button" title="Show the agents rail" aria-label="Show the agents rail" hidden>▸ AGENTS</button>
   </div>
 
   <!-- CREW / stage divider (leftrail.js): the mirror of the COMMS seam. It is a GRID CHILD, not a
@@ -679,7 +680,7 @@
          same Recruitment Bay in different modes — now a single #bb-recruit opens the bay once, and
          the class dossier offers BOTH verbs (summon new / deploy to current). -->
     <div class="bb-group" data-group="crew">
-      <button class="bb-grp" aria-haspopup="menu" aria-expanded="false" title="Your agents — dossiers, recruitment, and your own Commander file"><span class="bb-gi">☻</span>CREW</button>
+      <button class="bb-grp" aria-haspopup="menu" aria-expanded="false" title="Your agents — dossiers, recruitment, and your own Commander file"><span class="bb-gi">☻</span>AGENTS</button>
       <div class="bb-menu" role="menu">
         <button class="bb" data-term="agents"><span class="bb-i">◉</span><span class="bb-tx"><b>AGENTS</b><small>each crew member's dossier — config, memory, record</small></span></button>
         <button class="bb" id="bb-recruit" data-hint="recruit"><span class="bb-i">＋</span><span class="bb-tx"><b>RECRUIT</b><small>grow the crew — summon a class, or re-spec your agent</small></span></button>
