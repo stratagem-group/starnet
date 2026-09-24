@@ -63,7 +63,7 @@ const StationUI = typeof document === 'undefined' ? {} : (() => {
   const sfx = n => { try { if (typeof SFX === 'object' && SFX[n]) SFX[n](); } catch (_) {} };
 
   const KEY = 'starnet.station.v1';
-  const THEMES = [['amber', '#ffaa33'], ['green', '#3dff70'], ['blue', '#46c8ff'], ['purple', '#b46bff'], ['red', '#ff4136'], ['white', '#e8f0e8']];
+  const THEMES = [['xenexus', '#28b8ff'], ['amber', '#ffaa33'], ['green', '#3dff70'], ['blue', '#46c8ff'], ['purple', '#b46bff'], ['red', '#ff4136'], ['white', '#e8f0e8']];
 
   let present = [];          // agent objects currently on the station
   const runningAgents = new Map();   // agentId -> live-run COUNT (concurrent streams can share an agentId, e.g. 'agent')
@@ -95,7 +95,7 @@ const StationUI = typeof document === 'undefined' ? {} : (() => {
   // every save that predates this key merges to the exact look it already had.
   // panelBright (0–100, default 0) is the tube's BRIGHTNESS knob: it lifts the panel glass's black
   // level toward the phosphor colour (never toward white). 0 = the shipped look, untouched.
-  function defaults() { return { theme: 'amber', themeHue: 35, themeSat: 100, themeGlow: 100, panelBright: 0, roomLighting: 'low', textScale: 0, flicker: true, crtGlass: 'full', staticLevel: 100, sound: true, backdrop: 'void', sessionRow: 'compact', keepComputerAwake: false, notifyPrefs: notifyDefaults() }; }
+  function defaults() { return { theme: 'xenexus', themeHue: 35, themeSat: 100, themeGlow: 100, panelBright: 0, roomLighting: 'low', textScale: 0, flicker: true, crtGlass: 'full', staticLevel: 100, sound: true, backdrop: 'void', sessionRow: 'compact', keepComputerAwake: false, notifyPrefs: notifyDefaults() }; }
   // Raise overall room exposure without changing the distribution of its lights.
   // Existing saves retain their chosen level; missing values start at LOW.
   const ROOM_LIGHTING_STEPS = [
@@ -241,15 +241,15 @@ const StationUI = typeof document === 'undefined' ? {} : (() => {
   }
   // per-preset base glow alphas (from the hand-tuned body.theme-* blocks) so the GLOW dial can
   // scale a preset's bloom without re-deriving its locked palette.
-  const PRESET_GLOW = { amber: [0.5, 0.14], white: [0.35, 0.10] };
+  const PRESET_GLOW = { xenexus: [0.48, 0.15], amber: [0.5, 0.14], white: [0.35, 0.10] };
   // per-preset hue/sat so clicking a preset snaps the CUSTOM sliders to a matching start point.
-  const PRESET_HS = { amber: [35, 100], green: [136, 100], blue: [198, 100], purple: [270, 100], red: [3, 100], white: [120, 8] };
+  const PRESET_HS = { xenexus: [198, 100], amber: [35, 100], green: [136, 100], blue: [198, 100], purple: [270, 100], red: [3, 100], white: [120, 8] };
 
   /* ---------- settings → DOM ---------- */
   function applySettings() {
     const s = store.settings;
     applyRoomLighting(s.roomLighting);
-    document.body.classList.remove('theme-amber', 'theme-green', 'theme-blue', 'theme-purple', 'theme-red', 'theme-white', 'theme-custom');
+    document.body.classList.remove('theme-xenexus', 'theme-amber', 'theme-green', 'theme-blue', 'theme-purple', 'theme-red', 'theme-white', 'theme-custom');
     THEME_VARS.forEach(v => document.body.style.removeProperty(v));
     if (s.theme === 'custom') {
       document.body.classList.add('theme-custom');   // vars come from the inline derivation below (falls back to :root amber if JS ever misses)
