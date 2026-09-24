@@ -3245,7 +3245,7 @@ body.rows-inbox #workstreams .ws-kebab { grid-area: meta; }
 .ag-ptick.d { bottom: 3px; right: 3px; border-left: 0; border-top: 0; }
 .ag-psweep {
   position: absolute; left: 0; right: 0; height: 20px; z-index: 2; pointer-events: none;
-  background: linear-gradient(180deg, transparent, rgba(255, 205, 130, 0.16), transparent);
+  background: linear-gradient(180deg, transparent, rgba(var(--ph-rgb), 0.16), transparent);
   animation: ag-psweep 2.8s linear infinite;
 }
 @keyframes ag-psweep { 0% { top: -20px; } 100% { top: 112px; } }
