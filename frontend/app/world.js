@@ -8723,10 +8723,10 @@ const World = (() => {
       ctx.save();
       ctx.globalCompositeOperation = 'lighter';
       ctx.globalAlpha = 0.5 * k;
-      ctx.strokeStyle = '#e8c860'; ctx.lineWidth = 1.5;
+      ctx.strokeStyle = '#ffd52f'; ctx.lineWidth = 1.5;
       const grow = (1 - k) * 5;
       ctx.strokeRect(X - grow, Y - grow, Wd + grow * 2, Hd + grow * 2);   // the expanding catch ring
-      ctx.globalAlpha = 0.35 * k; ctx.fillStyle = '#e8c860';
+      ctx.globalAlpha = 0.35 * k; ctx.fillStyle = '#ffd52f';
       ctx.fillRect(X, Y, Wd, 2);                                          // hot rim on the dock's crown
       ctx.restore();
     }
@@ -9834,7 +9834,7 @@ const World = (() => {
     if (linkStaleDim) ctx.globalAlpha = 0.3;   // E1: link down → this jam length is last-known, not live; dim it
     for (let i = 0; i < shown; i++) drawWaitCrate(cx, top - i * 6 + Math.sin(now / 360 + i * 0.7) * 0.6);   // gentle idle bob
     if (depth > MAXVIS) {
-      ctx.fillStyle = '#e8c860'; ctx.font = "7px 'VT323','Courier New',monospace"; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#ffd52f'; ctx.font = "7px 'VT323','Courier New',monospace"; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.fillText('+' + (depth - MAXVIS), cx, top - shown * 6 - 3);
     }
     ctx.restore();
@@ -9843,9 +9843,9 @@ const World = (() => {
   function drawWaitCrate(cx, cy) {
     const x = Math.round(cx - 4), y = Math.round(cy - 4);
     ctx.fillStyle = '#161210'; ctx.fillRect(x - 1, y - 1, 11, 8);   // dark outline
-    ctx.fillStyle = '#8a7330'; ctx.fillRect(x, y + 3, 9, 3);        // shaded front face
-    ctx.fillStyle = '#caa84a'; ctx.fillRect(x, y, 9, 3);           // lit amber top
-    ctx.fillStyle = '#e8c860'; ctx.fillRect(x, y, 9, 1);           // top sheen
+    ctx.fillStyle = '#7c641f'; ctx.fillRect(x, y + 3, 9, 3);        // shaded front face
+    ctx.fillStyle = '#c59c2e'; ctx.fillRect(x, y, 9, 3);           // lit amber top
+    ctx.fillStyle = '#ffd52f'; ctx.fillRect(x, y, 9, 1);           // top sheen
   }
 
   /* SHIPPED TODAY — the production pride display. Every job completed today stacks a green PRODUCT
