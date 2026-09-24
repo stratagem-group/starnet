@@ -11796,12 +11796,12 @@ const PropSprites = (() => {
         }
         const x=(p.x+(p.w||1)/2)*TILE,anchor=p.y*TILE-surfaceLift(p)+1,h=11;
         const left=x-width/2,top=anchor-h/2;
-        ctx.fillStyle='#11191d';ctx.fillRect(left,top,width,h);
-        ctx.strokeStyle='#657077';ctx.lineWidth=.35;ctx.strokeRect(left,top,width,h);
-        ctx.strokeStyle='#28353c';ctx.strokeRect(left+.7,top+.7,width-1.4,h-1.4);
+        ctx.fillStyle='#07111a';ctx.fillRect(left,top,width,h);
+        ctx.strokeStyle='#2e6683';ctx.lineWidth=.35;ctx.strokeRect(left,top,width,h);
+        ctx.strokeStyle='#113449';ctx.strokeRect(left+.7,top+.7,width-1.4,h-1.4);
         // A small cyan rail ties the plate to the station's screen language.
-        ctx.strokeStyle='#64a7af';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(left+2,top+h-1.1);ctx.lineTo(left+width-2,top+h-1.1);ctx.stroke();
-        ctx.font=layout.font+"px 'VT323','Courier New',monospace";ctx.fillStyle='#d4e0e3';
+        ctx.strokeStyle='#28b8ff';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(left+2,top+h-1.1);ctx.lineTo(left+width-2,top+h-1.1);ctx.stroke();
+        ctx.font=layout.font+"px 'VT323','Courier New',monospace";ctx.fillStyle='#d9f4ff';
         layout.lines.forEach((line,i)=>ctx.fillText(line,x,anchor+(i-(layout.lines.length-1)/2)*4.5-.25));
       }
     } finally { ctx.restore(); }
