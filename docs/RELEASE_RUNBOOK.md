@@ -15,18 +15,18 @@ GitHub. The release train only ever stages a **DRAFT**. Until you publish, zero 
 see or download anything.
 
 **Fixed facts (from the code, do not retype from memory):**
-- Public source repo: `androoAGI/starnet` — where you run
+- Public source repo: `stratagem-group/starnet` — where you run
   `release:bump` and where the train workflow lives.
-- Public releases repo: `androoAGI/starnet-releases` — installers live here,
+- Public releases repo: `stratagem-group/starnet-releases` — installers live here,
   and this is what the updater points at.
 - Updater endpoint baked into every shipped binary
   (`src-tauri/tauri.conf.json` → `plugins.updater.endpoints[0]`):
-  `https://github.com/androoAGI/starnet-releases/releases/latest/download/latest.json`
+  `https://github.com/stratagem-group/starnet-releases/releases/latest/download/latest.json`
 - Updater signing key: `~/.tauri/starnet-updater.key` (see section 4 — this is the single
   most dangerous thing to lose in the whole project).
 - Release state is live data, not a fact to freeze in this runbook. Read the current in-tree version from
   the five pins listed in `docs/BRAIN.md`; list publicly receivable distribution releases with
-  `gh release list -R androoAGI/starnet-releases --exclude-drafts`; and inspect drafts separately before
+  `gh release list -R stratagem-group/starnet-releases --exclude-drafts`; and inspect drafts separately before
   selecting a version. A source tag or distribution draft already bearing that version is a collision even
   when no updater fleet can see it. (The version numbers used as examples below are illustrative.)
 
@@ -310,7 +310,7 @@ If any job is red, go to **section 2**.
 
 ### 1.7 Review the DRAFT release
 
-Open: `https://github.com/androoAGI/starnet-releases/releases` → the draft
+Open: `https://github.com/stratagem-group/starnet-releases/releases` → the draft
 tagged **v0.2.0** (it has a grey "Draft" badge; it is NOT yet the public "latest").
 
 Checklist — eyeball all of these before you publish:
@@ -371,13 +371,13 @@ The moment you publish, GitHub repoints `releases/latest` at v0.2.0, and every c
 
 ### 1.8a Source repository release mirror (automatic)
 
-Do **not** create a second release by hand on `androoAGI/starnet`. The
+Do **not** create a second release by hand on `stratagem-group/starnet`. The
 `sync-source-release` workflow in the source repository checks the dedicated distribution
 repository every 15 minutes (and also supports **Run workflow** for an immediate sync).
 After the distribution release is published it automatically:
 
 1. reads only `starnet-releases/releases/latest` (drafts and prereleases are ineligible),
-2. requires the matching immutable `v<version>` tag to exist in `androoAGI/starnet`,
+2. requires the matching immutable `v<version>` tag to exist in `stratagem-group/starnet`,
 3. downloads each human installer and verifies its GitHub SHA-256 digest,
 4. creates the source release as a draft, uploads the byte-identical installers, and only
    then publishes it as the source repository's **Latest** release, and
