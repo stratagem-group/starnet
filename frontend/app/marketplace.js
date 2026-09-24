@@ -1,4 +1,4 @@
-/* STARNET — marketplace.js : THE RECRUITMENT BAY — a premium "personnel registry" of agent classes.
+/* STARNET — marketplace.js : THE AGENT REGISTRY — a premium "personnel registry" of agent classes.
 
    Renders the Specialties catalog (built-ins + the Commander's saved customs) as a roster of engraved
    class SEALS (a challenge-coin per class, drawn by classicons.js — NEVER a character skin; the skin is
@@ -408,13 +408,13 @@ const Marketplace = (() => {
     }
   }
   /* The bay hosts TWO dock doors: CREW ▸ RECRUIT (agents) and WORK ▸ RECIPES. The nameplate used to be
-     hardcoded to RECRUITMENT BAY, so launching a recipe opened a window titled with a CREW concept — the
+     hardcoded to AGENT REGISTRY, so launching a recipe opened a window titled with a CREW concept — the
      subtitle and search placeholder already tracked the tab, the title never did (UI audit 2026-08-03).
      LABEL LAW (index.html): the title must match or be prefixed by the dock button that opened it, so the
      recipes tab reads RECIPES — exactly the ❒ RECIPES label. plainTitle() feeds the close button's
      aria-label; title() adds the ▮ nameplate glyph. */
   function plainTitle() {
-    return (!(ctx && ctx.mode === 'pick') && tab === 'recipes' && hasRecipes()) ? 'RECIPES' : 'RECRUITMENT BAY';
+    return (!(ctx && ctx.mode === 'pick') && tab === 'recipes' && hasRecipes()) ? 'RECIPES' : 'AGENT REGISTRY';
   }
   function title() { return '▮ ' + plainTitle(); }
 
