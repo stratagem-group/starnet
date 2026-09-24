@@ -647,6 +647,16 @@ Gate:
 
 ## Phase X4 — Rooms and props
 
+**Status:** Implemented as presentation-only room/prop skin; pending runtime/visual validation.
+
+Implemented:
+- new stations start as XENEXUS COMMAND / COMMAND CORE
+- built-in templates renamed to Xenexus-facing command/research/engineering/creative/operations concepts
+- template deck choices shifted toward existing cobalt/indigo/resin/tread/panel surfaces
+- high-visibility command/workstation/analytics prop labels rebranded
+- existing procedural prop art retained because its remaster path already uses cyan/amber electronics
+- all prop IDs, dimensions, capabilities, pathing, placement, serialization, and routing contracts preserved
+
 1. re-art high-visibility props
 2. retheme room surfaces
 3. rename visible room labels if desired
