@@ -3078,6 +3078,30 @@ const StationUI = typeof document === 'undefined' ? {} : (() => {
     cv.style.width = PORTRAIT_W + 'px'; cv.style.height = PORTRAIT_H + 'px';
     const pctx = cv.getContext('2d');
     pctx.clearRect(0, 0, cv.width, cv.height);
+
+    // Xenexus identity portraits are a presentation layer only. The world sprite remains the
+    // animation/state source; when a skin declares an explicit portrait, use it here and fall back
+    // to the live sprite renderer while it loads or if it fails.
+    const skin = (typeof DATA !== 'undefined' && DATA.SKINS) ? (DATA.SKINS[a.skin] || DATA.SKINS[DATA.DEFAULT_SKIN]) : null;
+    const portraitSrc = skin && skin.portrait;
+    if (portraitSrc) {
+      const pc = drawPortrait._portraitCache || (drawPortrait._portraitCache = new Map());
+      let rec = pc.get(portraitSrc);
+      if (!rec) {
+        const img = new Image(); rec = { img, failed: false }; pc.set(portraitSrc, rec);
+        img.onload = () => { if (cv.isConnected) drawPortrait(cv, a); };
+        img.onerror = () => { rec.failed = true; if (cv.isConnected) drawPortrait(cv, a); };
+        img.src = portraitSrc;
+      }
+      if (!rec.failed && rec.img.complete && rec.img.naturalWidth > 0) {
+        const pad = 5 * dev, sw = rec.img.naturalWidth, sh = rec.img.naturalHeight;
+        const k = Math.min((cv.width - pad * 2) / sw, (cv.height - pad * 2) / sh);
+        const dw = Math.round(sw * k), dh = Math.round(sh * k);
+        pctx.imageSmoothingEnabled = true;
+        pctx.drawImage(rec.img, Math.round((cv.width - dw) / 2), Math.round((cv.height - dh) / 2), dw, dh);
+        return;
+      }
+    }
     if (!(typeof SPRITES === 'object' && SPRITES.ready) || !SPRITES.isSkinReady(a.skin)) {
       // procedural fallback (sprites not yet loaded) — a simple body+head sized to the larger frame.
       pctx.imageSmoothingEnabled = false;
