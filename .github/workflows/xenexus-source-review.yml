@@ -1,0 +1,85 @@
+# Temporary source-only review transport. No dependency installation, application,
+# compiler, tests, provider calls, releases, deployments, or source writes.
+name: xenexus-source-review
+on:
+  push:
+    branches: [stratagem/isolation-remediation]
+    paths: [.github/workflows/xenexus-source-review.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-copy:
+    if: github.repository == 'stratagem-group/starnet' && github.ref == 'refs/heads/stratagem/isolation-remediation'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            **/*.js
+            **/*.mjs
+            **/*.cjs
+            **/*.json
+            **/*.jsonl
+            **/*.html
+            **/*.css
+            **/*.svg
+            **/*.rs
+            **/*.toml
+            **/*.lock
+            **/*.yml
+            **/*.yaml
+            **/*.md
+            **/*.txt
+            **/*.list
+            **/*.py
+            **/*.sh
+            **/*.ps1
+            **/*.nsh
+            **/*.plist
+            **/Dockerfile*
+            /.gitignore
+            /LICENSE
+            /NOTICE*
+      - name: Archive source as data only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess, tarfile
+          root = pathlib.Path.cwd()
+          dest = pathlib.Path(os.environ['RUNNER_TEMP']) / 'xenexus-source-review'
+          dest.mkdir()
+          inventory = subprocess.check_output(['git', 'ls-tree', '-r', '-l', '-z', 'HEAD'])
+          (dest / 'tracked-tree.bin').write_bytes(inventory)
+          (dest / 'head.txt').write_text(subprocess.check_output(['git','rev-parse','HEAD']).decode())
+          rows = []
+          with tarfile.open(dest / 'source.tar.gz', 'w:gz') as arc:
+              for record in inventory.split(b'\0'):
+                  if not record:
+                      continue
+                  meta, name = record.split(b'\t', 1)
+                  path = pathlib.Path(os.fsdecode(name))
+                  src = root / path
+                  if not src.is_file() or src.is_symlink():
+                      continue
+                  raw = src.read_bytes()
+                  try:
+                      raw.decode('utf-8')
+                  except UnicodeDecodeError:
+                      continue
+                  arc.add(src, arcname=path.as_posix(), recursive=False)
+                  rows.append({'path':path.as_posix(),'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()})
+          (dest / 'coverage.json').write_text(json.dumps({'sourceFiles':rows,'applicationExecuted':False,'testsExecuted':False},indent=2))
+          print('Archived',len(rows),'tracked UTF-8 files. No project code executed.')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: xenexus-source-review
+          path: ${{ runner.temp }}/xenexus-source-review/
+          retention-days: 2
+          if-no-files-found: error
