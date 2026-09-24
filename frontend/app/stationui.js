@@ -1749,7 +1749,7 @@ const StationUI = typeof document === 'undefined' ? {} : (() => {
     // A retired saved ID can alias an approved catalog entry without becoming an extra tile.
     const cur = (a && a.skin && Object.keys(skins).find(id => skins[id] === skins[a.skin]))
       || (typeof DATA !== 'undefined' ? DATA.DEFAULT_SKIN : '');
-    const thumbs = Object.keys(skins).map(id => {
+    const thumbs = Object.keys(skins).filter(id => skins[id] && skins[id].visible !== false).map(id => {
       const sk = skins[id];
       return '<button type="button" class="skin-thumb ag-skin-thumb' + (id === cur ? ' sel' : '') + '" data-skin="' + esc(id) + '" title="' + esc(sk.name || id) + '" aria-label="' + esc(sk.name || id) + '" aria-pressed="' + (id === cur ? 'true' : 'false') + '">' +
         '<img src="assets/sprites/' + esc(sk.set) + '/rot_south.png" alt="' + esc(sk.name || id) + '" draggable="false"></button>';
