@@ -1,4 +1,4 @@
-# One-off, source-only archive. No application, dependency installation or tests.
+# One-off source-only archive. No application, dependency installation or tests.
 name: xenexus-source-review
 on:
   push:
@@ -55,7 +55,8 @@ jobs:
           root = pathlib.Path.cwd()
           dest = pathlib.Path(os.environ['RUNNER_TEMP']) / 'xenexus-code-only'
           dest.mkdir()
-          inventory = subprocess.check_output(['git', 'ls-tree', '-r', '-l', '-z', 'HEAD'])
+          # Do not request blob sizes (-l): that lazily downloads every excluded asset.
+          inventory = subprocess.check_output(['git', 'ls-tree', '-r', '-z', 'HEAD'], timeout=30)
           (dest / 'tracked-tree.bin').write_bytes(inventory)
           (dest / 'head.txt').write_text(subprocess.check_output(['git','rev-parse','HEAD']).decode())
           allowed = {'.js','.mjs','.cjs','.json','.html','.css','.svg','.rs','.toml','.lock','.yml','.yaml','.md','.list','.py','.sh','.ps1','.nsh','.plist'}
