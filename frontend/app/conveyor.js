@@ -506,19 +506,19 @@ const Conveyor = (() => {
         _ctx.save();
         _ctx.globalCompositeOperation = 'lighter';
         _ctx.globalAlpha = Math.min(1, 0.55 * k);
-        _ctx.fillStyle = '#729f9f';
+        _ctx.fillStyle = '#28b8ff';
         _ctx.fillRect(cx - 3, cy - 3, 6, 6);                        // hot core
         _ctx.globalAlpha = 0.8 * k;
-        _ctx.strokeStyle = '#729f9f'; _ctx.lineWidth = 1;
+        _ctx.strokeStyle = '#28b8ff'; _ctx.lineWidth = 1;
         _ctx.beginPath(); _ctx.arc(cx, cy, 2 + (1 - k) * 5, 0, 6.2832); _ctx.stroke();
         _ctx.restore();
       }
     }
     // Paths are authored in exact tile coordinates: a belt stays one walkable
     // tile wide and joins the next tile at its edge centre in all four headings.
-    const BELT = { outline: '#070b0b', rim: '#545247', rail: '#292e2b',
-      edge: '#3e4138', bed: '#171f20', tread: '#3e4745', treadLight: '#777668',
-      groove: '#0a1112', mark: '#8a713d', light: '#82745a' };
+    const BELT = { outline: '#050a10', rim: '#243746', rail: '#172630',
+      edge: '#244251', bed: '#0b1820', tread: '#27424b', treadLight: '#4d7b88',
+      groove: '#071116', mark: '#ffd52f', light: '#28b8ff' };
     function beltPaths(X, Y, T, info) {
       const cx = X + T / 2, cy = Y + T / 2, out = DIRV[info.dir];
       return (info.incoming.length ? info.incoming : [info.dir]).map(d => {
@@ -549,7 +549,7 @@ const Conveyor = (() => {
           px(x, y, horiz ? 1.1 : .7, horiz ? .7 : 1.1, '#424438');
           px(x + .15, y + .1, .28, .28, '#8b7c5c');
           // Short worn amber witness marks sit on the metal, not across cargo.
-          if (((seed + Math.round(z)) & 3) === 0) px(x + (horiz ? .65 : .15), y + (horiz ? .15 : .65), horiz ? .65 : .22, horiz ? .22 : .65, '#957441');
+          if (((seed + Math.round(z)) & 3) === 0) px(x + (horiz ? .65 : .15), y + (horiz ? .15 : .65), horiz ? .65 : .22, horiz ? .22 : .65, '#b58a24');
         }
         const seam = start + span / 2;
         if (horiz) px(X + seam, Y + side - .15, .22, 1, '#0a1110');
@@ -559,7 +559,7 @@ const Conveyor = (() => {
         const east = closed.includes('E'), south = closed.includes('S');
         const x = X + T * (east ? .75 : .25) + (east ? -.6 : .6);
         const y = Y + T * (south ? .75 : .25) + (south ? -.6 : .6);
-        px(x - .4, y - .4, .8, .8, '#0d1412'); px(x - .2, y - .2, .35, .35, '#837653');
+        px(x - .4, y - .4, .8, .8, '#0d1412'); px(x - .2, y - .2, .35, .35, '#9f812f');
       }
     }
     function beltTile(X, Y, T, info, now, live) {
@@ -630,13 +630,13 @@ const Conveyor = (() => {
     function beltSource(X, Y, T, info) {
       const v = DIRV[info.dir], cx = X + T / 2 - v[0] * (T / 2 - 1.2), cy = Y + T / 2 - v[1] * (T / 2 - 1.2);
       // Fixed feeder collar: no ambient flash suggesting a job is about to spawn.
-      if (v[0]) { px(cx - .5, Y + 2, 1, T - 4, '#514c3a'); px(cx - .5, Y + 2, .3, T - 4, BELT.light); }
-      else { px(X + 2, cy - .5, T - 4, 1, '#514c3a'); px(X + 2, cy - .5, T - 4, .3, BELT.light); }
+      if (v[0]) { px(cx - .5, Y + 2, 1, T - 4, '#1d3440'); px(cx - .5, Y + 2, .3, T - 4, BELT.light); }
+      else { px(X + 2, cy - .5, T - 4, 1, '#1d3440'); px(X + 2, cy - .5, T - 4, .3, BELT.light); }
     }
     function beltSink(X, Y, T, info) {
       const v = DIRV[info.dir], cx = X + T / 2 + v[0] * (T / 2 - 1), cy = Y + T / 2 + v[1] * (T / 2 - 1);
-      if (v[0]) { px(cx - .6, Y + 2, 1.2, T - 4, '#050a0b'); px(cx - .6, Y + 2, .3, T - 4, '#675e45'); }
-      else { px(X + 2, cy - .6, T - 4, 1.2, '#050a0b'); px(X + 2, cy - .6, T - 4, .3, '#675e45'); }
+      if (v[0]) { px(cx - .6, Y + 2, 1.2, T - 4, '#050a0b'); px(cx - .6, Y + 2, .3, T - 4, '#24404c'); }
+      else { px(X + 2, cy - .6, T - 4, 1.2, '#050a0b'); px(X + 2, cy - .6, T - 4, .3, '#24404c'); }
     }
 
     /* ---------- box art ---------- */
