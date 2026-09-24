@@ -16,9 +16,10 @@ GitHub Issues are currently disabled for this repository, so this file is the au
 ## Execution order
 
 ### 1. Fork baseline and provenance — P0
-Status: [~]
+Status: [x]
 
 Completed:
+- upstream/fork baseline pinned at `7ee93ceac14c6bcb500ab263e92186e3a2d8b5d7`
 - repository transferred to `stratagem-group/starnet`
 - working branch established as `stratagem/bootstrap-audit`
 - package repository/homepage/issues metadata repointed to Stratagem
@@ -26,13 +27,13 @@ Completed:
 - production-readiness program committed
 - workflow-routing guide committed
 
-Remaining:
-- record exact upstream baseline commit SHA
-- record fork head after documentation/hygiene commits
-- document recommended local remotes
+Recommended local remotes:
+- `origin` → `https://github.com/stratagem-group/starnet.git`
+- `upstream` → `https://github.com/androoAGI/starnet.git`
 
 Acceptance:
 - exact lineage is reconstructable
+- baseline upstream and fork commit are identical at the point of fork
 
 ### 2. Baseline test suite — P0
 Status: [ ]
