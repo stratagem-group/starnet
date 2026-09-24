@@ -20,6 +20,7 @@ Stratagem-owned operating documents for this derivative:
 - **STRATAGEM_FORK_STATUS.md** — current ownership/upstream/release boundary.
 - **STRATAGEM_RELEASE_ISOLATION_AUDIT.md** — upstream distribution coupling and required separation.
 - **SPRINT_1_BACKLOG.md** — authoritative current hardening tracker while GitHub Issues remain disabled.
+- **XENEXUS_FRONTEND_BUCKET_MAP.md** — file-by-file keep/reskin/surgical-modification map for the Xenexus frontend conversion.
 
 ## Living architecture / subsystem reference
 
