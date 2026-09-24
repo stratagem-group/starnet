@@ -668,6 +668,17 @@ Gate:
 
 ## Phase X5 — Dashboard framing
 
+**Status:** Implemented conservatively; pending runtime/visual validation.
+
+Implemented:
+- existing three-column game-screen geometry preserved
+- CREW visible label changed to AGENTS while internal keys/IDs remain stable
+- small static XENEXUS LIVE STATION center identifier added
+- fresh installs receive real default telemetry widgets only
+- saved widget layouts remain authoritative
+- Xenexus theme adds restrained command-shell framing without changing dimensions
+- no duplicate dashboard state or fake telemetry introduced
+
 Use existing surfaces instead of introducing a second dashboard application.
 
 1. left rail → active agents / operations
