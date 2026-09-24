@@ -19,6 +19,12 @@ function registerAgent(id, color) {
    here + a matching sprite set in assets/sprites/manifest.json. `scale` is the
    per-set downscale applied at tint time (crew sprites render on a 92px canvas). */
 DATA.SKINS = {
+  xenexus_command: {"name":"Command","set":"approved_blank_amber","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-command.svg","xenexusRole":"command"},
+  xenexus_research: {"name":"Research","set":"approved_blank_blue","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-research.svg","xenexusRole":"research"},
+  xenexus_engineering: {"name":"Engineering","set":"approved_blank_green","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-engineering.svg","xenexusRole":"engineering"},
+  xenexus_intelligence: {"name":"Intelligence","set":"approved_android","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-intelligence.svg","xenexusRole":"intelligence"},
+  xenexus_security: {"name":"Security","set":"approved_robot","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-security.svg","xenexusRole":"security"},
+  xenexus_systems: {"name":"Systems","set":"approved_blank_red","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-systems.svg","xenexusRole":"systems"},
   blank: {"name":"Cadet","set":"approved_android","scale":0.25,"sourceStandingHeight":76},
   astronaut: {"name":"Retro Astronaut","set":"approved_astronaut","scale":0.25,"sourceStandingHeight":76},
   robot: {"name":"Robot","set":"approved_robot","scale":0.25,"sourceStandingHeight":76},
@@ -59,4 +65,9 @@ DATA.SKINS = {
 };
 // Keep the retired duplicate readable in old saves without offering it in the picker.
 Object.defineProperty(DATA.SKINS, 'minionchar', { value: DATA.SKINS.station_minion });
-DATA.DEFAULT_SKIN = 'blank';
+// Legacy/third-party-compatible skins remain addressable for old saves but are hidden from
+// the normal Xenexus picker. New agents use the Xenexus identity set above.
+for (const id of Object.keys(DATA.SKINS)) {
+  if (!id.startsWith('xenexus_')) DATA.SKINS[id].visible = false;
+}
+DATA.DEFAULT_SKIN = 'xenexus_command';
