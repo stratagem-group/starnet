@@ -41,7 +41,9 @@ const Widgets = (() => {
   const FEED_RE = /^feed:[a-z0-9][a-z0-9-]{0,23}$/;   // pinned-layout id for an agent-fed record: 'feed:' + its widget.set slug
 
   let wired = false;
-  let layout = { top: [], bot: [] };   // widgets are user-chosen app data; no counters pinned by default
+  // Fresh Xenexus stations open with a restrained truthful command readout. A persisted v1 layout,
+  // including an intentionally empty one, always wins in load() below.
+  let layout = { top: ['crew', 'active', 'approvals'], bot: ['runs24', 'queue', 'cron'] };
 
   // ---- live data (module-local; all painted from here) ----
   let insights = null;        // last good /api/insights fold (null until first poll lands)
@@ -196,10 +198,10 @@ const Widgets = (() => {
   const CATALOG = {
     crew: {
       stats: true,
-      lbl: 'CREW', tip: 'Agents in your current station roster, including the overseer.',
+      lbl: 'AGENTS', tip: 'Agents in your current station roster, including the overseer.',
       paint() { return { val: typeof App !== 'undefined' && App.crewCount ? String(App.crewCount()) : null, sub: 'station roster' }; }
     },
-    active: { stats: true, lbl: 'ACTIVE COMMS', tip: 'Confirmed running conversations in COMMS. Connecting requests are shown separately; background jobs are not included.', paint: () => commsReadout(false) },
+    active: { stats: true, lbl: 'ACTIVE', tip: 'Confirmed running conversations in COMMS. Connecting requests are shown separately; background jobs are not included.', paint: () => commsReadout(false) },
     approvals: { lbl: 'NEEDS YOU', action: 'Review waiting conversation', tip: 'Conversations waiting for your approval or answer. Use the arrow to open the first waiting conversation.', paint: () => ({ ...commsReadout(true), tone: typeof Channels !== 'undefined' && Channels.pendingIds().length ? 'warn' : null }) },
     next: { lbl: 'NEXT ROUTINE', action: 'Open scheduled routines', tip: 'The next enabled routine on the scheduler. Use the arrow to view or change your schedule. A due time does not mean the job has started.', paint: () => nextRoutine(cron, Date.now()) },
     runs24: {
