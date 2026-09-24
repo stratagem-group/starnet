@@ -576,6 +576,8 @@ Not allowed:
 
 ## Phase X1 — Brand shell
 
+**Status:** Implemented on `stratagem/bootstrap-audit`; draft PR #1 open for validation.
+
 Low risk, immediate visual payoff.
 
 1. add Xenexus theme tokens
