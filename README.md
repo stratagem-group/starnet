@@ -19,6 +19,9 @@
 
 </div>
 
+> [!IMPORTANT]
+> **Stratagem fork status:** this repository is a derivative under active internal hardening. It is **not an official StarNet distribution** and currently must not be used to publish Stratagem desktop binaries. The upstream name, logo, station artwork, sprites, updater channel, and other brand assets remain subject to the upstream project's NOTICE. A Stratagem release will require its own product identity, artwork, signing key, and update channel.
+
 StarNet is a local-first desktop harness where you create AI agents, organize them into a
 pixel-art space station, and watch them perform real work with real models and tools. The
 station is not decoration — it is a projection of live runtime state, and the product contract
