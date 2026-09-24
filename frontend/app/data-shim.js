@@ -19,12 +19,12 @@ function registerAgent(id, color) {
    here + a matching sprite set in assets/sprites/manifest.json. `scale` is the
    per-set downscale applied at tint time (crew sprites render on a 92px canvas). */
 DATA.SKINS = {
-  xenexus_command: {"name":"Command","set":"approved_blank_amber","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-command.svg","xenexusRole":"command"},
-  xenexus_research: {"name":"Research","set":"approved_blank_blue","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-research.svg","xenexusRole":"research"},
-  xenexus_engineering: {"name":"Engineering","set":"approved_blank_green","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-engineering.svg","xenexusRole":"engineering"},
-  xenexus_intelligence: {"name":"Intelligence","set":"approved_android","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-intelligence.svg","xenexusRole":"intelligence"},
-  xenexus_security: {"name":"Security","set":"approved_robot","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-security.svg","xenexusRole":"security"},
-  xenexus_systems: {"name":"Systems","set":"approved_blank_red","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-systems.svg","xenexusRole":"systems"},
+  xenexus_command: {"name":"Vanguard","set":"approved_blank_amber","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-command.svg","xenexusRole":"command"},
+  xenexus_research: {"name":"Cipher","set":"approved_blank_blue","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-research.svg","xenexusRole":"research"},
+  xenexus_engineering: {"name":"Forge","set":"approved_blank_green","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-engineering.svg","xenexusRole":"engineering"},
+  xenexus_intelligence: {"name":"Specter","set":"approved_android","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-intelligence.svg","xenexusRole":"intelligence"},
+  xenexus_security: {"name":"Aegis","set":"approved_robot","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-security.svg","xenexusRole":"security"},
+  xenexus_systems: {"name":"Relay","set":"approved_blank_red","scale":0.25,"sourceStandingHeight":76,"portrait":"assets/brand/portraits/xenexus-systems.svg","xenexusRole":"systems"},
   blank: {"name":"Cadet","set":"approved_android","scale":0.25,"sourceStandingHeight":76},
   astronaut: {"name":"Retro Astronaut","set":"approved_astronaut","scale":0.25,"sourceStandingHeight":76},
   robot: {"name":"Robot","set":"approved_robot","scale":0.25,"sourceStandingHeight":76},
