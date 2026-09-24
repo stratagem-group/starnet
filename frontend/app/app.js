@@ -9,7 +9,7 @@ const App = (() => {
   // contexts are safe); keep the null-guard the old local copy had so U.esc(null) never renders "null".
   const esc = s => U.esc(s == null ? '' : s);
   // CRT-muted crew suit tints — distinct per crew member but passed through the amber-phosphor grade (no pure neons). Last entry stays gold to match ORCH_COLOR.
-  const SUITS = ['#6fb3bf', '#7bc88a', '#d99a5a', '#a888c0', '#cf7d96', '#ffd34a'];
+  const SUITS = ['#28b8ff', '#1676a9', '#ffd52f', '#4d7b88', '#d9f4ff', '#0b5fa5'];
 
   let agent = null;           // the FOCUSED agent — COMMS + camera target. Every existing `agent.` reference still
                               //   reads "the agent in front of you"; summon adds more, focus repoints this pointer.
@@ -2372,7 +2372,7 @@ const App = (() => {
     // 10th behind nine characters. Data order (data-shim.js) is untouched; this is purely the render order.
     const def = DATA.DEFAULT_SKIN;
     const inFamily = id => id === def || id.indexOf(def + '_') === 0;
-    const ids = Object.keys(DATA.SKINS);
+    const ids = Object.keys(DATA.SKINS).filter(id => DATA.SKINS[id] && DATA.SKINS[id].visible !== false);
     const ordered = [def, ...ids.filter(id => id !== def && inFamily(id)), ...ids.filter(id => !inFamily(id))].filter(id => DATA.SKINS[id]);
     // stage handle (assigned by the mount below): drive THIS stage, not the module-level shortcut, which
     // belongs to whichever picker mounted last once more than one is on screen.
