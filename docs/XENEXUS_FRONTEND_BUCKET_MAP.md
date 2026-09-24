@@ -595,6 +595,17 @@ Gate:
 
 ## Phase X2 — Station palette
 
+**Status:** Implemented on `stratagem/bootstrap-audit`; pending visual/runtime validation.
+
+Implemented:
+- Xenexus blue/gold conveyor palette
+- blue live-route/merge activity treatment
+- gold route-direction and dock emphasis
+- Xenexus bay/name plates
+- Xenexus-blue room stencils
+- existing dark-blue WorldLight illumination retained because it already aligns with the target palette
+- no changes to conveyor simulation, routing compiler, pathing, geometry, or world state
+
 1. tune camera grade
 2. change world UI overlays from amber/green dominance to blue/yellow Xenexus
 3. tune CRT via existing CRT lab
