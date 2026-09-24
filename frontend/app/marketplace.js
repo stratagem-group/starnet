@@ -828,7 +828,7 @@ const Marketplace = (() => {
   function summonSkinBarHTML() {
     if (!(ctx && ctx.mode === 'pick' && ctx.summon) || typeof DATA === 'undefined' || !DATA.SKINS) return '';
     if (!pickedSummonSkin || !DATA.SKINS[pickedSummonSkin]) pickedSummonSkin = DATA.DEFAULT_SKIN;
-    const thumbs = Object.keys(DATA.SKINS).map(id => {
+    const thumbs = Object.keys(DATA.SKINS).filter(id => DATA.SKINS[id] && DATA.SKINS[id].visible !== false).map(id => {
       const sk = DATA.SKINS[id];
       return '<button type="button" class="skin-thumb' + (id === pickedSummonSkin ? ' sel' : '') +
         '" data-skin="' + esc(id) + '" aria-pressed="' + (id === pickedSummonSkin) + '" title="' + esc(sk.name || id) + '">' +
