@@ -997,7 +997,7 @@ const StationUI = typeof document === 'undefined' ? {} : (() => {
       screen.appendChild(head); screen.appendChild(body);
       w.appendChild(screen);
       w.appendChild(mkEl('div', 'term-plate',
-        '<span>STARNET DYNAMICS</span><span class="term-knobs"><i class="knob"></i><i class="knob"></i></span>'));
+        '<span>XENEXUS DYNAMICS</span><span class="term-knobs"><i class="knob"></i><i class="knob"></i></span>'));
     } else {
       w.appendChild(head); w.appendChild(body);
       // Phase-2 chrome (generic, plain windows only — feature windows carry their own casing):
@@ -3231,7 +3231,7 @@ const StationUI = typeof document === 'undefined' ? {} : (() => {
      console is height:auto AND CSS-centred, so every tab whose content is a different length re-centres the whole
      window: measured live, the tab strip you just clicked moved between y=236 (CONFIG) and y=387 (RESTORE) — up to
      151px out from under the cursor, on the control you are actively using. The pane scrolls; the chrome holds still. */
-  function openAgent(i) { sel = i; if (open.agents) { if (minimized.agents) restoreTerm('agents'); rerender('agents'); } else toggleTerm('agents', 'AGENT DOSSIER', buildAgents, { console: true, className: 'dossier' }); }
+  function openAgent(i) { sel = i; if (open.agents) { if (minimized.agents) restoreTerm('agents'); rerender('agents'); } else toggleTerm('agents', 'XENEXUS AGENT DOSSIER', buildAgents, { console: true, className: 'dossier' }); }
 
   /* ============== SKILLS — capability readout (mirrors the sidecar CAP_REGISTRY) ==============
      The agent's real tools come from the OBJECTS at its workstation (object = capability — see
@@ -4011,7 +4011,7 @@ const StationUI = typeof document === 'undefined' ? {} : (() => {
     const streams = boardStreams();
     const openMenus = live ? Array.from(body.querySelectorAll('.kb-more[open]')).map(d => d.closest('.kb-card').dataset.id) : [];
     body.innerHTML =
-      '<div class="kb-heading"><header class="kb-header"><h2>Your tasks</h2><p>Plan, start, and review your work.</p></header><div class="work-entry"><button type="button" class="bb sm" data-work-to="outbox">OUTBOX</button><button type="button" class="bb sm" data-work-to="deliverables">LIBRARY</button></div></div>' +
+      '<div class="kb-heading"><header class="kb-header"><h2>Operations board</h2><p>Plan, start, and review active work.</p></header><div class="work-entry"><button type="button" class="bb sm" data-work-to="outbox">OUTBOX</button><button type="button" class="bb sm" data-work-to="deliverables">LIBRARY</button></div></div>' +
       '<div class="kb-add"><input id="kb-in" aria-label="New task" maxlength="80" placeholder="What would you like to get done?" autocomplete="off">' +
       '<button class="bb sm" id="kb-add">ADD TASK</button></div><p class="kb-add-note">Adding saves your plan. Start sends the task to its agent.</p>' +
       '<div class="kb-cols">' +
@@ -9633,19 +9633,19 @@ const StationUI = typeof document === 'undefined' ? {} : (() => {
 
   /* ============== lifecycle ============== */
   const BUILDERS = {
-    agents:   ['AGENT DOSSIER',          buildAgents,    { console: true, className: 'dossier' }],
+    agents:   ['XENEXUS AGENT DOSSIER',          buildAgents,    { console: true, className: 'dossier' }],
     // WINDOW SIZE = one of two shells (2026-08-13): default PANEL, or WIDE (`console` = wide + rail,
     // `wide` = wide width only). The old per-window pixel widths (460/540/560/620/640/760/1000) are
     // gone — they made eight windows read as eight unrelated apps. A window earns WIDE only by having
     // a rail, a card grid, or side-by-side columns; everything single-column is a PANEL.
-    commander:['COMMANDER DOSSIER',      buildCommander, { console: true, className: 'commander-console' }],   // focused profile, preferences, briefing, and record sections
+    commander:['COMMANDER PROFILE',      buildCommander, { console: true, className: 'commander-console' }],   // focused profile, preferences, briefing, and record sections
     // NAV CONDENSE 2 (2026-08-04): 'skills' is no longer a window key — the skill library/agent-
     // skills sections live in the ABILITIES (connectors) console via AbilityLanes, and per-agent
     // capabilities live in the dossier's SKILLS tab. openTerm keeps the old keys alive as aliases
     // (TERM_ALIAS). UPDATES stays its own SYSTEM-dock window (Andrew's call — an update is a
     // check-it-now surface, not a setting).
     updates:  ['UPDATE CENTER',          buildUpdates,   {}],
-    tasks:    ['TASK BOARD',             buildTasks,     { console: true, className: 'tasks-win' }],   // three kanban lanes side by side
+    tasks:    ['OPERATIONS BOARD',             buildTasks,     { console: true, className: 'tasks-win' }],   // three kanban lanes side by side
     // DELIVERABLES is console-WIDE (a project rail beside the cards needs the room) and holds a STEADY height for
     // the same reason the dossier does: a never-moved window is CSS-centred, so a content-fit box would re-centre
     // itself every time a card's details drawer opens — the row you just clicked would slide out from under you.
@@ -9654,8 +9654,8 @@ const StationUI = typeof document === 'undefined' ? {} : (() => {
     settings: ['SETTINGS',               buildSettings,  { console: true }],
     notifs:   ['NOTIFICATIONS',          buildNotifs,    { console: true, className: 'notifs-win' }],
     // the FIELD MANUAL codex is owned by tutorial.js (P3); this term just hosts its builder
-    manual:   ['FIELD MANUAL',           body => { if (typeof Tutorial !== 'undefined' && Tutorial.fillFieldManual) Tutorial.fillFieldManual(body); }, { console: true, className: 'manual-win' }],
-    quests:   ['QUEST LOG',              buildQuests,    { console: true, className: 'quests-win' }],   // a card grid, not a column; quests-win = STEADY height so a data poke can never re-centre the window mid-read
+    manual:   ['COMMAND MANUAL',           body => { if (typeof Tutorial !== 'undefined' && Tutorial.fillFieldManual) Tutorial.fillFieldManual(body); }, { console: true, className: 'manual-win' }],
+    quests:   ['OBJECTIVES',              buildQuests,    { console: true, className: 'quests-win' }],   // a card grid, not a column; quests-win = STEADY height so a data poke can never re-centre the window mid-read
   };
 
   /* ============== EXTRACTED-WINDOW SEAM (frontend/app/windows/*.js) ==============
