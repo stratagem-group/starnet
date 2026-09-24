@@ -1,4 +1,4 @@
-# Temporary source-only review transport. No project code or tests execute.
+# One-off, source-only archive. No application, dependency installation or tests.
 name: xenexus-source-review
 on:
   push:
@@ -14,45 +14,46 @@ jobs:
   source-copy:
     if: github.repository == 'stratagem-group/starnet' && github.ref == 'refs/heads/stratagem/isolation-remediation'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: 80990c2c786e40141a71273289237b04c5ede544
           fetch-depth: 1
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            **/*.js
-            **/*.mjs
-            **/*.cjs
-            **/*.json
-            **/*.html
-            **/*.css
-            **/*.svg
-            **/*.rs
-            **/*.toml
-            **/*.lock
-            **/*.yml
-            **/*.yaml
-            **/*.md
-            **/*.list
-            **/*.py
-            **/*.sh
-            **/*.ps1
-            **/*.nsh
-            **/*.plist
-            **/Dockerfile*
-            /.gitignore
+            /sidecar/**
+            /shared/**
+            /frontend/app/**
+            /frontend/js/**
+            /frontend/css/**
+            /frontend/index.html
+            /frontend/assets/sprites/manifest.json
+            /frontend/assets/brand/**
+            /src-tauri/src/**
+            /src-tauri/*.json
+            /src-tauri/*.toml
+            /src-tauri/*.lock
+            /src-tauri/*.rs
+            /src-tauri/capabilities/**
+            /src-tauri/installer/*.nsh
+            /scripts/**
+            /test/**
+            /.github/**
+            /*.json
+            /*.md
             /LICENSE
             /NOTICE*
-      - name: Archive bounded source tree as data only
+            /.gitignore
+      - name: Archive code and configs as data
         shell: bash
         run: |
           set -euo pipefail
           python3 -u - <<'PY'
           import hashlib, json, os, pathlib, subprocess, tarfile
           root = pathlib.Path.cwd()
-          dest = pathlib.Path(os.environ['RUNNER_TEMP']) / 'xenexus-source-review'
+          dest = pathlib.Path(os.environ['RUNNER_TEMP']) / 'xenexus-code-only'
           dest.mkdir()
           inventory = subprocess.check_output(['git', 'ls-tree', '-r', '-l', '-z', 'HEAD'])
           (dest / 'tracked-tree.bin').write_bytes(inventory)
@@ -63,28 +64,27 @@ jobs:
               for record in inventory.split(b'\0'):
                   if not record: continue
                   meta, name = record.split(b'\t', 1)
-                  path = pathlib.Path(os.fsdecode(name))
+                  path = pathlib.Path(os.fsdecode(name)); parts = path.parts; text = path.as_posix()
+                  if path.suffix not in allowed and path.name not in {'LICENSE','.gitignore','Dockerfile'}: continue
+                  runtime = parts[0] in {'sidecar','shared','scripts','test','.github'}
+                  frontend = len(parts)>1 and parts[0]=='frontend' and (parts[1] in {'app','css','js','index.html'} or text=='frontend/assets/sprites/manifest.json' or text.startswith('frontend/assets/brand/'))
+                  native = parts[0]=='src-tauri' and (len(parts)==2 or parts[1] in {'src','capabilities','installer'})
+                  if not (runtime or frontend or native or len(parts)==1): continue
                   src = root / path
-                  parts = path.parts
-                  text = path.as_posix()
-                  wanted = path.suffix in allowed or path.name in {'LICENSE','.gitignore','Dockerfile'}
-                  if not wanted or not src.is_file() or src.is_symlink(): continue
-                  # Source art, historical evidence and captured payloads are inventory-only.
-                  if src.stat().st_size > 8_000_000 or any(x in parts for x in {'evidence','receipts','node_modules','.git','captures'}):
+                  if not src.is_file() or src.is_symlink(): skipped.append(text); continue
+                  if src.stat().st_size>5_000_000 or any(x in parts for x in {'node_modules','evidence','fixtures','captures','workspaces'}):
                       skipped.append(text); continue
-                  if '/assets/' in text and path.suffix not in {'.json','.svg','.md'}: continue
                   raw = src.read_bytes()
                   try: raw.decode('utf-8')
                   except UnicodeDecodeError: skipped.append(text); continue
                   arc.add(src, arcname=text, recursive=False)
                   rows.append({'path':text,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()})
-                  if len(rows) % 1000 == 0: print('Archived',len(rows),'files',flush=True)
           (dest / 'coverage.json').write_text(json.dumps({'sourceFiles':rows,'inventoryOnly':skipped,'applicationExecuted':False,'testsExecuted':False},indent=2))
-          print('DONE:',len(rows),'files,',sum(x['bytes'] for x in rows),'bytes; no project code executed.',flush=True)
+          print('DONE',len(rows),'source files;',sum(x['bytes'] for x in rows),'bytes. No project code executed.')
           PY
       - uses: actions/upload-artifact@v4
         with:
-          name: xenexus-source-review
-          path: ${{ runner.temp }}/xenexus-source-review/
+          name: xenexus-code-only
+          path: ${{ runner.temp }}/xenexus-code-only/
           retention-days: 2
           if-no-files-found: error
