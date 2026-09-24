@@ -693,6 +693,20 @@ Gate:
 
 ## Phase X6 — Secondary surfaces
 
+**Status:** Implemented as terminology + chrome pass; pending runtime/visual validation.
+
+Implemented:
+- Xenexus Agent Dossier
+- Commander Profile
+- Operations Board
+- Command Manual
+- Objectives
+- Agent Registry
+- Xenexus Build Mode
+- Xenexus blue/gold floating-window chrome
+- local extension copy updated to Xenexus
+- internal keys, stores, APIs, handlers, persistence namespaces, and window IDs preserved
+
 Reskin:
 - COMMS
 - dossier
