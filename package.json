@@ -7,11 +7,11 @@
   "author": "Andrew Sims",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/androoAGI/starnet.git"
+    "url": "git+https://github.com/stratagem-group/starnet.git"
   },
-  "homepage": "https://github.com/androoAGI/starnet#readme",
+  "homepage": "https://github.com/stratagem-group/starnet#readme",
   "bugs": {
-    "url": "https://github.com/androoAGI/starnet/issues"
+    "url": "https://github.com/stratagem-group/starnet/issues"
   },
   "keywords": [
     "ai-agents",
