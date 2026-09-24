@@ -1617,7 +1617,7 @@ const App = (() => {
      surface that choice up-front so the Commander sets the whole station's colour the moment they build
      it — picking a swatch recolours live AND writes through StationUI.setTheme so it survives enterGame
      and stays in lockstep with the in-game Settings panel. No new state, no fakery. */
-  const PHOSPHOR = Object.freeze([['amber', '#ffaa33'], ['green', '#3dff70'], ['blue', '#46c8ff'], ['purple', '#b46bff'], ['red', '#ff4136'], ['white', '#e8f0e8']]);
+  const PHOSPHOR = Object.freeze([['xenexus', '#28b8ff'], ['amber', '#ffaa33'], ['green', '#3dff70'], ['blue', '#46c8ff'], ['purple', '#b46bff'], ['red', '#ff4136'], ['white', '#e8f0e8']]);
   // THE APPROVAL MODE — the crucial pick for the everything-orchestrator: how much it can do on its own. This is
   // NOT cosmetic — it drives the REAL consent broker in the sidecar (full → bypass the gate; ask → prompt on any
   // mutation/network call), threaded through pushRoster → /api/roster. `np` is the nameplate readout.
@@ -1627,15 +1627,15 @@ const App = (() => {
   ]);
   const approvalById = id => APPROVAL.find(a => a.id === id) || APPROVAL[0];
   function applyTheme(t) {
-    document.body.classList.remove('theme-amber', 'theme-green', 'theme-blue', 'theme-purple', 'theme-red', 'theme-white', 'theme-custom');
+    document.body.classList.remove('theme-xenexus', 'theme-amber', 'theme-green', 'theme-blue', 'theme-purple', 'theme-red', 'theme-white', 'theme-custom');
     document.body.classList.add('theme-' + t);
     // 'custom' carries no palette in CSS — its derived vars are inline on <body>, set by
     // StationUI.applySettings at init and cleared by StationUI.setTheme when a preset is picked here.
   }
   function buildPhosphor() {
     const wrap = el('phosphor-swatches'); if (!wrap) return;
-    let cur = 'amber';
-    try { if (typeof StationUI !== 'undefined' && StationUI.getTheme) cur = StationUI.getTheme() || 'amber'; } catch (_) {}
+    let cur = 'xenexus';
+    try { if (typeof StationUI !== 'undefined' && StationUI.getTheme) cur = StationUI.getTheme() || 'xenexus'; } catch (_) {}
     applyTheme(cur);   // reflect a previously-saved tint on the create screen too (StationUI hasn't entered yet)
     wrap.innerHTML = '';
     PHOSPHOR.forEach(([t, c]) => {
