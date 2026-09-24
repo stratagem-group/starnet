@@ -15,9 +15,9 @@ const App = (() => {
                               //   reads "the agent in front of you"; summon adds more, focus repoints this pointer.
   const agents = new Map();   // agentId -> agent object (hero + summoned crew) — the live multi-agent roster
   let resumingSaved = null;   // a save awaiting a re-entered key
-  const ORCH_COLOR = '#ffd34a';   // the Orchestrator's suit tint — gold marks the lead (same gold as SUITS' last entry). No color picker any more (skins are the visual identity); summoned crew cycle SUITS.
+  const ORCH_COLOR = '#ffd52f';   // the Orchestrator's suit tint — gold marks the lead (same gold as SUITS' last entry). No color picker any more (skins are the visual identity); summoned crew cycle SUITS.
   let pickedColor = ORCH_COLOR;
-  let pickedSkin = (typeof DATA !== 'undefined' && DATA.DEFAULT_SKIN) || 'bear';   // the sprite set the new agent will wear
+  let pickedSkin = (typeof DATA !== 'undefined' && DATA.DEFAULT_SKIN) || 'xenexus_command';   // the sprite set the new agent will wear
   let pickedPersona = (typeof Personas !== 'undefined') ? Personas.DEFAULT_ID : 'professional';
   let pickedTraits = {};        // the VOICE & MANNER fine-tune dials (warmth/humor/formality/length + emoji/blunt) — only set keys contribute prompt text
   let pickedCustomVoice = '';   // the Commander's free-text "in their own words" voice note (optional)
@@ -231,7 +231,7 @@ const App = (() => {
     // sidecar/capability/office.js + capgate F1). So the identity must NOT promise web/files unconditionally; it
     // tells the agent to use whatever it's actually been granted and to SAY when a tool is missing (that's the
     // signal that teaches the Commander what to place next), never to pretend a reach it doesn't have.
-    let s = 'You are ' + name + ', an AI agent operating from a workstation aboard the STARNET station — a room '
+    let s = 'You are ' + name + ', an AI agent operating from a workstation aboard the XENEXUS station — a room '
       + 'your Commander (the user) is building for you. Address the user as "Commander" and keep a spark of personality. '
       + 'Your workstation grants you REAL tools — exactly the ones the Commander has placed in your room (web search/read, '
       + 'file read/write, a terminal, memory, and more as the station grows; compute to think is always yours). When the '
