@@ -4,7 +4,7 @@ Status: active
 Owner: Stratagem Group
 Upstream: androoAGI/starnet
 Baseline branch: feat/harness-backend
-Working branch: viral-fawkes/bootstrap-audit
+Working branch: stratagem/bootstrap-audit
 Initial fork version observed: 0.12.4
 
 ## Purpose
