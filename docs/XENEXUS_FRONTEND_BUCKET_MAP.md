@@ -619,6 +619,21 @@ Gate:
 
 ## Phase X3 — Agent identity
 
+**Status:** Implemented as compatibility-first identity layer; pending runtime/visual validation.
+
+Implemented:
+- six visible Xenexus identities: Vanguard, Cipher, Forge, Specter, Aegis, Relay
+- Xenexus-first default skin catalog
+- legacy skins remain readable for existing saves but hidden from normal new-agent pickers
+- explicit richer portrait assets for crew/COMMS/dossier
+- portrait fallback to existing sprite crop
+- Xenexus suit/accent palette
+- no changes to sprite manifest, pathing, movement state, specialties, tools, or permissions
+
+Art note:
+- current world sprites reuse proven neutral animation chassis
+- fully original Xenexus directional sprite sets are deferred to an art-only X3B pass
+
 1. create first Xenexus sprite family
 2. integrate via current sprite manifest
 3. add optional `portrait.png` support
